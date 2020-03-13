@@ -4,8 +4,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', login, async(req, res, next) =>{
 
-
-  res.render('index', { title: 'Express'});
+  var r=await req.knex.select("*").from("t_descr")
+  res.render('index', { title: r[0].title, descr:r[0]});
 });
 
 function login(req, res, next){

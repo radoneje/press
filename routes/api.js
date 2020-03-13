@@ -80,6 +80,24 @@ router.post("/checkSMS",async (req, res, next)=> {
   }
 
 })
+function login(req, res, next){
+  if(req.session['user'])
+    next();
+  else
+    res.redirect('/login');
+}
+router.post("/quest",login,async (req, res, next)=> {
+  var r=await req.knex("t_q").insert({text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
+   r=await req.knex.select("*").from("v_q").where({id:r[0].id});
+  res.json(r[0]);
+})
+router.get("/quest",login,async (req, res, next)=> {
+  var r=await req.knex.select("*").from("v_q");// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
+
+
+  res.json(r);
+})
+
 
 
 
