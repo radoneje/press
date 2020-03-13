@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  div.adminContainer(id="app")
+    div.adminBox
+      div.adminLabel название мероприятия
+      input.adminTextBox(type="text" v-model="desc.title" v-on:change="descrChange()")
+    div.adminBox
+      div.adminLabel лид мероприятия
+      textarea.adminTextArea(v-model="desc.lid" v-on:change="descrChange()")
+    div.adminBox
+      div.adminLabel подзаголовок
+      input.adminTextBox(type="text" v-model="desc.subtitle" v-on:change="descrChange()")
+    div.adminBox
+      div.adminLabel текст
+      textarea.adminTextArea(v-model="desc.descr" v-on:change="descrChange()")
+    div.adminBox
+      div.adminLabel дата и время мероприятия
+      input.adminTextBox(v-model="desc.date" v-on:change="descrChange()")
+    div.smiBox
+      div.adminHeader СМИ
+        span.adminBtn(v-on:click="addSmi()") добавить
+      div.smiWr
+        div.smiItem(v-for="item in smi")
+          input(type="text" placeholder="введите название" v-model="item.title" v-on:change="changeSmi(item)")
+          input.smiCode(readonly v-model="item.code")
+          div.smiDelete(v-on:click="deleteSmi(item)") удалить
+
+
+  script(src="/javascripts/adminScript.js")
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+extends layout
+
+block head
+
+block content
+  div.container(id="app")
+    div.startMyVideo.btn.btn-default(v-if="!myVideoIsStarted" v-on:click="startVideo()") Запустить видео
+    div.startMyVideo.btn.btn-default(v-else v-on:click="stopVideo()") Остановить видео
+    div.camerabox( v-if="myVideoIsStarted" )
+      video(id="local_video" autoplay muted)
+  script(src="/javascripts/roomScript.js")
+
+
+
+
+

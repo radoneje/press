@@ -1,0 +1,26 @@
+{
+  "name": "press",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "connect-pg-simple": "^6.1.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-session": "^1.17.0",
+    "http-errors": "~1.6.3",
+    "knex": "^0.20.11",
+    "less-middleware": "~2.2.1",
+    "morgan": "~1.9.1",
+    "pg": "^7.18.2",
+    "pug": "2.0.0-beta11",
+    "reset.css": "^2.0.2",
+    "socket.io": "^2.3.0",
+    "webrtc-adapter": "^7.5.0",
+    "websocket": "^1.0.31"
+  }
+}

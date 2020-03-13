@@ -1,0 +1,10 @@
+{
+  "port": 8080,
+  "pgConnection":  {
+    "host" : "127.0.0.1",
+    "user" : "postgres",
+    "password" : "gbplf13",
+    "database" : "press"
+  },
+  "sha256Secret": "dfdcz44grby"
+}

@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  script(src="/javascripts/clientScript.js")
+  h1 test web phone
+  div.container
+    <div class="camerabox">
+    <video id="received_video" autoplay></video>
+    <video id="local_video" autoplay muted></video>
+    <button id="hangup-button" onclick="hangUpCall();" role="button" > Hang Up</button>
+    </div>
+
+
+
+
+

@@ -1,0 +1,496 @@
+body{
+  font-family: 'Fedra Sans Pro';
+}
+@bg:#E5E5E5;
+
+.loginBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+.loginWr form{
+  width: 300px;
+  padding-bottom: 40px;
+}
+.loginWr input{
+  padding: 4px;
+  margin:10px;
+  width: 100%;
+  display: block;
+}
+.adminContainer{
+  margin:40px;
+}
+.adminBox{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.adminLabel{
+  color: #767676;
+  font-size: 12px;
+}
+.adminBox input{
+  width: 600px;
+  padding:4px ;
+}
+.adminBox textarea{
+  width: 600px;
+  height: 6em;
+  padding:4px ;
+}
+.smiBox{
+  margin-top:40px;
+
+}
+.adminHeader{
+  font-size: 14px;
+}
+.adminBtn{
+  background: #767676;
+  border-radius: 4px;
+  color: white;
+  padding:4px 4px ;
+  width: max-content;
+  margin: 10px 0 ;
+  margin-left: 1em;
+  cursor: pointer;
+}
+
+.smiItem{
+  margin: 10px 0;
+}
+.smiItem input{
+  width: 200px;
+  padding: 4px;
+}
+.smiItem span{
+  margin-left: 1em;
+}
+.smiCode{
+  display: inline-block;
+  width: 80px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+}
+.smiDelete{
+  display: inline-block;
+  padding: 4px;
+  background: #7d0000;
+  color: white;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 4em !important;
+}
+.lBox{
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background: @bg;
+}
+.lTower{
+  width: 100%;
+  max-width: 1792px;
+  margin:0 auto;
+}
+.lTop{
+  width: 100%;
+  height: 560px;
+  background: linear-gradient(107.93deg, #A6B0A8 24.57%, #BFC5C1 94.25%);;
+  position: relative;
+  overflow: hidden;
+}
+.lTopDecor{
+  position: absolute;
+  width: 1369.75px;
+  height: 942.83px;
+  left: 379.87px;
+  top: -410.7px;
+  background: linear-gradient(70.63deg, rgba(255, 255, 255, 0.2) 0.42%, rgba(255, 255, 255, 0) 126.52%);
+  transform: rotate(41.22deg);
+}
+.lTopWr{
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.lTopL{
+  width: 50%;
+  height: 100%;
+}
+.lTopR{
+  width: 50%;
+  height: 100%;
+
+}
+.lColTower{
+  padding: 32px 56px;
+  width: ~"calc(100% - 56px - 56px)";
+  height: ~"calc(100% - 32px - 32px)";
+}
+.lTopTitle{
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 60px;
+
+  color: #FFFFFF;
+  margin-top: 112px;
+}
+.lTopLid{
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 32px;
+  margin-top: 24px;
+  color: #FFFFFF;
+  white-space: pre-line
+}
+.lColRcontainer{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.lColTopWr{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.lTopRBox{
+  position: absolute;
+  right: 218px;
+  top: 0;
+  height: 100%;
+  width: 481px;
+
+}
+.lTopRBoxShadow{
+  position: absolute;
+  right: 18px;
+  top: 0;
+  height: 815px;
+  width: 815px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 100%);
+
+}
+.lBottom{
+  width: 100%;
+  min-height:~"calc(100vh -  560px)";
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+
+}
+.lBsubTitle{
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  /* identical to box height */
+  margin-top: 32px;
+
+  color: #262626;
+}
+.lBsubDescr{
+  width: 672px;
+  white-space: pre-line;
+  margin-top: 24px;
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+  color: #262626;
+}
+.lBsubHed{
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  margin-top: 48px;
+}
+.lBsubTime{
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  margin-top: 16px;
+  color: #28BA54;
+}
+.lBsubRTitle{
+  margin-top: 32px;
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  /* or 133% */
+
+
+  color: #262626;
+}
+.lBsubRTitleMust {
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  /* identical to box height, or 156% */
+  margin-top:16px;
+  color: #FFA715;
+}
+.llBox{
+
+display: flex;
+}
+.llInputBox{
+
+}
+.llInputBox{
+  margin-right: 48px;
+  position: relative;
+  margin-top:30px;
+}
+.llInputBox.warning{
+  margin-bottom: -15px;
+}
+.llInputBox input, .llInputBox div.sel{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+  /* identical to box height, or 175% */
+  display: flex;
+  align-items: center;
+  color: #262626;
+  padding: 10px;
+  width: ~"calc(100% - 22px)";
+  border:1px solid black;
+  border-radius: 2px;
+}
+.llInputBox.warning input, .llInputBox.warning div.sel{
+  border:1px solid #FF6A59;;
+}
+.llInputBox div.sel{
+  font: 400 16px system-ui;
+  color:#808084;
+  padding: 14px 10px;
+  cursor: pointer;
+  position: relative;
+}
+.llInputBox div.sel:after{
+  position: absolute;
+  top:15px;
+  right: 15px;
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-color: black;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(-45deg);
+
+}
+.llInputBoxWarning{
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+
+
+  color: #FF6A59;
+  position: relative;
+  left: 0;
+  bottom: -4px;
+  display: none;
+}
+.llInputBox.warning .llInputBoxWarning{
+  display: block;
+}
+input:focus{
+  outline: none !important;
+}
+.llHalf{
+  width: 50%;
+}
+.llSubmit{
+  cursor: pointer;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #28BA54;
+  border-radius: 4px;
+  height: 50px;
+}
+.llSmiBox{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+ // border:1px solid #262626;
+  color:#262626;
+  width: ~"calc(100% - 0px)";
+  top:-20px;
+  padding: 8px 0px;
+  box-shadow: 0 0 16px 0 rgba(38,38,38,.16);
+  border-radius: 2px;
+  z-index: 1;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+}
+.llSmiItem{
+  margin: 0px 0;;
+  padding: 5px 20px;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 100;
+  position: relative;
+}
+.llSmiItem.selected:after{
+  content: '';
+  display: block;
+  border-bottom: 2px solid #28BA54;
+  border-left: 2px solid #28BA54;
+  position: absolute;
+  width: 12px;
+  height: 6px;
+  transform: rotate(-45deg);
+  top: 9px;
+  right: 20px;
+}
+.llSmiItem:hover {
+  background: #F2F4F6;
+}
+.llFooter{
+  padding: 32px 56px;
+  background: white;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 28px;
+}
+.llFooter span{
+  color: #28BA54;
+}
+.fullScreenBox{
+  background: rgba(38, 38, 38, 0.4);
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.smsBox{
+  width: 380px;
+  background: white;
+  padding: 30px;
+}
+.smsLogo{
+  display: block;
+  margin: 0 auto;
+}
+.smsHeader{
+  margin-top: 16px;
+  text-align: center;
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  /* identical to box height, or 133% */
+  text-align: center;
+  color: #262626;
+}
+.smsNo{
+  margin-top: 16px;
+  border: 1px solid #C9CBCD;
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: 100%;
+  padding: 5px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+}
+.smsSubmit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: 100%;
+  height: 42px;
+  background: #F2F4F6;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #8E9297;
+  margin-top:32px
+}
+.smsSubmit:hover{
+  color: #262626;
+}
+.smsReturn{
+  margin-top:32px;
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  text-align: center;
+  cursor: pointer;
+  color: #28BA54;
+  font-weight: 100;
+}
+.smsInpBox{
+  position: relative;
+}
+.smsInpBox .llInputBoxWarning{
+  position: absolute;
+  left: 0;
+  bottom: -18px;
+  font-family: Fedra Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FF6A59;
+  display: none;
+}
+.smsInpBox.warning .llInputBoxWarning{
+  display: block;
+}
+.smsInpBox.warning input{
+  border:1px solid #FF6A59;
+}

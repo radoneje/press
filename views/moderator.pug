@@ -1,0 +1,18 @@
+extends layout
+
+block head
+  script(src="/lib/axios.js")
+  script(src="/lib/moment.min.js")
+  script(src="/lib/moment.ru.js")
+  script(src="/lib/socket.io.js")
+  script(src="/lib/vue.min.js")
+block content
+  div.container(id="app")
+    video(v-for="video in videos" autoplay muted controls v-bind:id="'video_'+video.id")
+
+  script(src="/javascripts/moderatorScript.js")
+
+
+
+
+
