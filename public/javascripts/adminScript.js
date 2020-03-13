@@ -3,9 +3,27 @@ new Vue({
     el: '#app',
     data: {
         desc:{},
-        smi:[]
+        smi:[],
+        menu:[{id:1,title:"Модерация", a:true},{id:2,title:"СМИ", a:false}, {id:3,title:"Заголовки", a:false}],
+        menuActive:1,
+        qText:"",
+        chatText:"",
+        q:[],
+        chat:[],
+        users:[],
     },
     methods: {
+        changeSection:function(item){
+            var _this=this;
+            this.menu.forEach(function (e) {
+                if(e.id==item.id){
+                    _this.menuActive=e.id;
+                    e.a=true
+                }
+                else
+                    e.a=false
+            })
+        },
         descrChange:async function () {
             var re=await axios.post("/rest/api/descr", this.desc);
             this.desc=re.data;
@@ -25,12 +43,74 @@ new Vue({
         },
         changeSmi: async function(item){
                 var re=await axios.post("/rest/api/smi", item);
+        },
+        qtextChange:function (e) {
+            var _this=this;
+            qtextChange(_this,e)
+
+        },
+        chattextChange:function (e) {
+            var _this=this;
+            chattextChange(_this, e);
+
+        },
+        chatAddSmile:function () {
+            this.chatText+=" :) ";
+            document.getElementById("chatText").focus();
+        },
+        deleteChat:function (item) {
+            var _this=this;
+            if(confirm('Вы хотите удалть сообщение')){
+                axios.delete("/rest/api/chatdelete/"+item.id)
+                    .then(function (r) {
+
+                        })
+
+            }
+        },
+        deleteQ:function (item) {
+            var _this=this;
+            if(confirm('Вы хотите удалть сообщение')){
+                axios.delete("/rest/api/qdelete/"+item.id)
+                    .then(function (r) {
+
+                    })
+
+            }
+        },
+        QsetNew:function (item) {
+            axios.post("/rest/api/qsetStatus/",{id:item.id, status:false})
+                .then(function (r) {
+
+                })
+        },
+        QsetOld:function (item) {
+            axios.post("/rest/api/qsetStatus/",{id:item.id, status:true})
+                .then(function (r) {
+
+                })
         }
     },
     mounted: async function () {
+      var _this=this;
       var re= await axios.get("/rest/api/descr");
       this.desc=re.data;
         var re= await axios.get("/rest/api/smi");
         this.smi=re.data;
+
+        axios.get("/rest/api/quest")
+            .then(function (r) {
+                _this.q=r.data;
+            })
+        axios.get("/rest/api/chat")
+            .then(function (r) {
+                _this.chat=r.data;
+            })
+        axios.get("/rest/api/users")
+            .then(function (r) {
+                _this.users=r.data;
+            })
+        connect(_this);
+
     }
 });

@@ -6,11 +6,14 @@ var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
 var http = require('http');
 const config=require('./config')
-var session = require('express-session')
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
+
+var clients=[];
+const emit=(event, data)=>{clients.forEach(cl=>{if(cl.isActive) cl.socket.emit(event,data)})};
 
 var knex = require('knex')({
   client: 'pg',
@@ -44,6 +47,13 @@ app.use(session({
 
 
 app.use("/", (req,res, next)=>{req.knex=knex;next();});
+app.use("/", (req,res, next)=>{req.clients=clients;next();});
+
+app.use("/", (req,res, next)=>{
+  req.emit=emit;
+  next();}
+  );
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -70,20 +80,25 @@ var server = http.createServer(app);
 server.listen(config.port,e=>{
   console.log("server listen "+ config.port);
   var clientId=0;
-  var clients=[];
+
   const io = require('socket.io')(server);
   io.on('connection', (socket) => {
         console.log("client connected", clients.length );
         var id=clientId;
-        clients.push({id:id,isActive:true, socket:socket})
-    clientId++;
 
+      socket.on("hello",(userId)=>{
+        clients.push({id:id,isActive:true, socket:socket, userid:userId})
+        clientId++;
+        emit("userConnnect",userId)
+      })
       socket.on("disconnect",(user)=>{
         console.log("client disconnected")
         clients.forEach(cl=>{
           if(cl.id==id)
             cl.isActive=false;
+          emit("userDisconnnect",cl.userid)
         })
+
       })
     socket.on("roomVideoMessage",(data)=>{
       console.log("roomVideoMessage", data.type, id)

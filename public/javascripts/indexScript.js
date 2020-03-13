@@ -1,10 +1,13 @@
 new Vue({
     el: '#app',
     data: {
-        sect:[{title:"Вопросы", isActive:true, id:1}, {title:"Чат", isActive:false, id:2},{title:"Участники", isActive:false, id:3} ],
+        sect:[{title:"Вопросы", isActive:false, id:1}, {title:"Чат", isActive:true, id:2},{title:"Участники", isActive:false, id:3} ],
         qText:"",
+        chatText:"",
         q:[],
-        activeSection:1
+        chat:[],
+        users:[],
+        activeSection:2
     },
     methods: {
         sectActive:function (item) {
@@ -19,26 +22,35 @@ new Vue({
         },
         qtextChange:function (e) {
             var _this=this;
-          if(e.keyCode==13){
-              axios.post("/rest/api/quest",{text:_this.qText})
-                  .then(function (e) {
-                      _this.qText="";
-                      _this.q.push(e.data);
-                      setTimeout(function () {
-                          var objDiv = document.getElementById("qBox");
-                          objDiv.scrollTop = objDiv.scrollHeight;
-                      },0)
-                  })
+            qtextChange(_this,e)
 
-          }
+        },
+        chattextChange:function (e) {
+            var _this=this;
+            chattextChange(_this, e);
+
+        },
+        chatAddSmile:function () {
+            this.chatText+=" :) ";
+            document.getElementById("chatText").focus();
         }
     },
     mounted:  function () {
         var _this=this;
-        connect();
+        connect(_this);
         axios.get("/rest/api/quest")
             .then(function (r) {
                 _this.q=r.data;
+            })
+        axios.get("/rest/api/chat")
+            .then(function (r) {
+                _this.chat=r.data;
+            })
+        axios.get("/rest/api/users")
+            .then(function (r) {
+                _this.users=r.data;
+
+                console.log(_this.users)
             })
     }
 
@@ -46,37 +58,3 @@ new Vue({
 
 
 
-function connect(){
-    var serverUrl;
-    var scheme = "http";
-    if (document.location.protocol === "https:") {
-        scheme += "s";
-    }
-    serverUrl = document.location.protocol + "//" + myHostname;
-    log(`Connecting to server: ${serverUrl}`);
-    var socket = io('http://localhost');
-    socket.on('connect', function() {
-        log("connection.onopen")
-        sendToServer=function (data, type) {
-            socket.emit(type||"roomVideoMessage", data);
-        }
-        socket.on("roomVideoMessage", (msg)=>{
-            switch(msg.type) {
-                case "video-answer":  // Invitation and offer to chat
-                                      //handleVideoAnswerMsg(msg);
-                    log("handleVideoAnswerMsg")
-                    var desc = new RTCSessionDescription(msg.sdp);
-                    myPeerConnection.setLocalDescription({type: "rollback"})
-                        .then(function(){
-                            myPeerConnection.setRemoteDescription(desc)
-                                .then(function () {
-                                    log("setRemoteDescription set")
-                                })
-                        })
-
-                    break;
-            }
-
-        })
-    })
-}

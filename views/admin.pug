@@ -1,32 +1,105 @@
 extends layout
-
+block head
+  style.
+    body{
+      background: #EBEDEC;
+      color: #262626;
+      height: 100vh;
+    }
 block content
   div.adminContainer(id="app")
-    div.adminBox
-      div.adminLabel название мероприятия
-      input.adminTextBox(type="text" v-model="desc.title" v-on:change="descrChange()")
-    div.adminBox
-      div.adminLabel лид мероприятия
-      textarea.adminTextArea(v-model="desc.lid" v-on:change="descrChange()")
-    div.adminBox
-      div.adminLabel подзаголовок
-      input.adminTextBox(type="text" v-model="desc.subtitle" v-on:change="descrChange()")
-    div.adminBox
-      div.adminLabel текст
-      textarea.adminTextArea(v-model="desc.descr" v-on:change="descrChange()")
-    div.adminBox
-      div.adminLabel дата и время мероприятия
-      input.adminTextBox(v-model="desc.date" v-on:change="descrChange()")
-    div.smiBox
-      div.adminHeader СМИ
-        span.adminBtn(v-on:click="addSmi()") добавить
-      div.smiWr
-        div.smiItem(v-for="item in smi")
-          input(type="text" placeholder="введите название" v-model="item.title" v-on:change="changeSmi(item)")
-          input.smiCode(readonly v-model="item.code")
-          div.smiDelete(v-on:click="deleteSmi(item)") удалить
+    div.aMenu
+        div.aMenuItem(v-for="item in menu" v-bind:class="{active:item.a}" v-on:click="changeSection(item)") {{item.title}}
+    div(v-if="menuActive==3")
+      div.adminBox
+        div.adminLabel название мероприятия
+        input.adminTextBox(type="text" v-model="desc.title" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel лид мероприятия
+        textarea.adminTextArea(v-model="desc.lid" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel подзаголовок
+        input.adminTextBox(type="text" v-model="desc.subtitle" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel текст
+        textarea.adminTextArea(v-model="desc.descr" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel дата и время мероприятия
+        input.adminTextBox(v-model="desc.date" v-on:change="descrChange()")
+    div(v-if="menuActive==2")
+      div.smiBox
+        div.adminHeader
+          span.adminBtn(v-on:click="addSmi()") добавить СМИ
+        div.smiWr
+          div.smiItem(v-for="item in smi")
+            input(type="text" placeholder="введите название" v-model="item.title" v-on:change="changeSmi(item)")
+            input.smiCode(readonly v-model="item.code")
+            div.smiDelete(v-on:click="deleteSmi(item)") удалить
+    div.aModBox(v-if="menuActive==1")
+      div.aModSect
+        div.aModSectTitle ЧАТ
+        div.aSectBody(id="chatBox")
+          div.qItem(v-for="item in chat")
+            div.qItemSmi  {{item.smi}}
+            div.qItemName {{item.i}}&nbsp;{{item.f}}
+            div.qItemText {{item.text}}
+            div.qItemDate
+                span.link.red(v-on:click="deleteChat(item)") Удалить
+                span &nbsp;&nbsp;
+                span {{moment(item.date).format("HH:MM")}}
+        div.rFooter
+          div.askWr
+            <svg v-on:click="chatAddSmile()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 22C18.299 22 23 17.299 23 11.5C23 5.70101 18.299 1 12.5 1C6.70101 1 2 5.70101 2 11.5C2 17.299 6.70101 22 12.5 22Z" stroke="#9A9A9A"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 11C10.3284 11 11 10.1046 11 9C11 7.89543 10.3284 7 9.5 7C8.67157 7 8 7.89543 8 9C8 10.1046 8.67157 11 9.5 11Z" fill="#9A9A9A"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 11C16.3284 11 17 10.1046 17 9C17 7.89543 16.3284 7 15.5 7C14.6716 7 14 7.89543 14 9C14 10.1046 14.6716 11 15.5 11Z" fill="#9A9A9A"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.37027 13.5247C6.27006 13.3332 6.41166 13.116 6.62779 13.116H18.5288C18.7536 13.116 18.8943 13.3497 18.7776 13.5418C18.0473 14.7436 15.7228 18.0745 12.3926 18.0745C9.0464 18.0745 6.99138 14.7116 6.37027 13.5247Z" stroke="#9A9A9A"/>
+            </svg>
+            input.ask(placeholder="Напишите Ваше сообщение" id="chatText" v-model="chatText" v-on:keydown="chattextChange($event)")
+      div.aModSect
+        div.aModSectTitle Вопросы
+        div.aSectBody(id="qBox")
+          div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
+            div.qItemSmi  {{item.smi}}
+            div.qItemName {{item.i}}&nbsp;{{item.f}}
+            div.qItemText {{item.text}}
+            div.qItemDate
+              span.link.green(v-if="item.isReady" v-on:click="QsetNew(item)") Пометить новым&nbsp;&nbsp;
+              span.link.green(v-else v-on:click="QsetOld(item)") gченным&nbsp;&nbsp;
+                span
+                  <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.7319 0.295798C13.639 0.20207 13.5284 0.127675 13.4065 0.0769067C13.2846 0.026138 13.1539 0 13.0219 0C12.8899 0 12.7592 0.026138 12.6373 0.0769067C12.5155 0.127675 12.4049 0.20207 12.3119 0.295798L4.86192 7.7558L1.73192 4.6158C1.6354 4.52256 1.52146 4.44925 1.3966 4.40004C1.27175 4.35084 1.13843 4.32671 1.00424 4.32903C0.870064 4.33135 0.737655 4.36008 0.614576 4.41357C0.491498 4.46706 0.380161 4.54428 0.286922 4.6408C0.193684 4.73732 0.12037 4.85126 0.0711659 4.97612C0.0219619 5.10097 -0.00216855 5.2343 0.000152918 5.36848C0.00247438 5.50266 0.0312022 5.63507 0.0846957 5.75814C0.138189 5.88122 0.215401 5.99256 0.311922 6.0858L4.15192 9.9258C4.24489 10.0195 4.35549 10.0939 4.47735 10.1447C4.59921 10.1955 4.72991 10.2216 4.86192 10.2216C4.99394 10.2216 5.12464 10.1955 5.2465 10.1447C5.36836 10.0939 5.47896 10.0195 5.57192 9.9258L13.7319 1.7658C13.8334 1.67216 13.9144 1.5585 13.9698 1.432C14.0253 1.30551 14.0539 1.1689 14.0539 1.0308C14.0539 0.892697 14.0253 0.756091 13.9698 0.629592C13.9144 0.503092 13.8334 0.389441 13.7319 0.295798Z" fill="#28BA54"/>
+                  </svg>
+              span &nbsp;&nbsp;
+              span.link.red(v-on:click="deleteQ(item)") Удалить
+              span &nbsp;&nbsp;
+              span {{moment(item.date).format("HH:MM")}}
+        div.rFooter
+          div.askWr
+            input.ask(placeholder="Напишите Ваш вопрос" v-model="qText" v-on:keydown="qtextChange($event)")
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 8C1.5 7.17157 2.17157 6.5 3 6.5H12C12.8284 6.5 13.5 7.17157 13.5 8V16C13.5 16.8284 12.8284 17.5 12 17.5H3C2.17157 17.5 1.5 16.8284 1.5 16V8Z" stroke="#9A9A9A"/>
+            <path d="M22.0992 5.00042C22.3496 5.16734 22.5 5.44833 22.5 5.74924V18.2508C22.5 18.5517 22.3496 18.8327 22.0992 18.9996C21.7655 19.222 21.3249 19.1968 21.0187 18.9378L16.0311 14.7175C15.6943 14.4325 15.5 14.0136 15.5 13.5724V10.4276C15.5 9.98637 15.6943 9.56752 16.0311 9.28252L21.0187 5.06222C21.3249 4.80315 21.7655 4.77795 22.0992 5.00042Z" stroke="#9A9A9A"/>
+            </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 7.99902V12.2314C20 15.9695 16.8372 18.9999 12.9392 18.9999H12.0608C8.16121 18.9999 5 15.9654 5 12.2314V7.99902V7.99902" stroke="#9A9A9A"/>
+            <rect x="8.5" y="1.5" width="8" height="14" rx="2.5" stroke="#9A9A9A"/>
+            <path d="M12.6484 18.6797V23.7894" stroke="#9A9A9A"/>
+            </svg>
 
+      div.aModSect
+        div.aModSectTitle Пользователи
+        div.aSectBody.aSectUser
+          div.qItem.userItem(v-for="item in users" v-bind:class="{active:(item.isActive)}")
+            div.qItemSmi  {{item.title}}
+            div.qItemName {{item.i}}&nbsp;{{item.f}}
+            div.userItemAvatar
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.9993 2.66663C8.77135 2.66663 2.66602 8.77196 2.66602 16C2.66602 23.228 8.77135 29.3333 15.9993 29.3333C23.2274 29.3333 29.3327 23.228 29.3327 16C29.3327 8.77196 23.2274 2.66663 15.9993 2.66663ZM15.9993 9.33329C18.302 9.33329 19.9993 11.0293 19.9993 13.3333C19.9993 15.6373 18.302 17.3333 15.9993 17.3333C13.698 17.3333 11.9993 15.6373 11.9993 13.3333C11.9993 11.0293 13.698 9.33329 15.9993 9.33329ZM9.19135 22.3626C10.3873 20.6026 12.382 19.4293 14.666 19.4293H17.3327C19.618 19.4293 21.6114 20.6026 22.8074 22.3626C21.1034 24.1866 18.686 25.3333 15.9993 25.3333C13.3127 25.3333 10.8953 24.1866 9.19135 22.3626Z" fill="#9A9A9A"/>
+              </svg>
 
+  script.
+    var userId=!{JSON.stringify(user.id)};
   script(src="/javascripts/adminScript.js")
 
 
