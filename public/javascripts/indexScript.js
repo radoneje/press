@@ -79,10 +79,11 @@ new Vue({
                             startSnap(video, _this);
                             startConf(video,remoteVideo, _this)
                             remoteVideo.addEventListener("playing", function () {
-                                alert(123)
+                               // alert(123)
                                 remoteVideo.style.display="block";
                                 YTplayer.mute();
-                                alert(YTplayer.isMuted)
+                                console.log("remoteVideo ON", YTplayer.isMutedYTplayer.isMuted)
+                                //alert(YTplayer.isMuted)
 
                             })
 
