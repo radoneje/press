@@ -140,6 +140,14 @@ router.post("/qsetStatus/",adminLogin,async (req, res, next)=> {
   req.emit("qStatus",{id:r[0].id, isReady:r[0].isReady});
   res.json(r[0].id)
 })
+router.post("/handup",login,async (req, res, next)=> {
+  console.log("handup",req.body);
+  var r=await req.knex("t_users").update({handup:req.body.handUp}, "*").where({id:req.body.id});
+  req.emit("userHandup",{id:r[0].id, handup:req.body.handUp });
+  res.json(r[0].id)
+})
+
+
 
 
 module.exports = router;

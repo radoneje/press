@@ -51,7 +51,7 @@ block content
       div.L
         div.Lhead
           div.greenBtn
-            div.btnContent
+            div.btnContent(v-if="isEsc6() && !webCamStream" v-on:click="startRTC()" )
               span
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13.7246 13.5257C12.7736 14.4746 11.2323 14.4746 10.2814 13.5257C9.33069 12.5768 9.33069 11.0382 10.2814 10.0893C11.2323 9.14033 12.7736 9.14033 13.7246 10.0893C14.6752 11.0382 14.6752 12.5768 13.7246 13.5257Z" fill="white"/>
@@ -60,12 +60,30 @@ block content
                 <path d="M6.94938 17.2073C6.65365 17.2073 6.35791 17.0947 6.1318 16.8691C4.77716 15.5171 4.03125 13.7193 4.03125 11.8072C4.03125 9.8947 4.77716 8.0972 6.1318 6.74519C6.58403 6.29355 7.31678 6.29413 7.76813 6.74665C8.21977 7.19888 8.2189 7.93163 7.76667 8.38328C6.85022 9.29797 6.34563 10.514 6.34563 11.8072C6.34563 13.1004 6.85022 14.3164 7.76667 15.2311C8.2189 15.6824 8.21977 16.4152 7.76813 16.8674C7.54231 17.0938 7.2457 17.2073 6.94938 17.2073Z" fill="white"/>
                 <path d="M4.33215 20.6143C4.03612 20.6143 3.74039 20.5017 3.51457 20.2762C1.24816 18.0141 0 15.0065 0 11.8073C0 8.60773 1.24816 5.60009 3.51457 3.33807C3.9668 2.88672 4.69955 2.88731 5.1509 3.33983C5.60254 3.79206 5.60166 4.52452 5.14944 4.97616C3.32122 6.80087 2.31409 9.2267 2.31409 11.807C2.31409 14.3872 3.32122 16.8134 5.14944 18.6381C5.60166 19.0897 5.60254 19.8222 5.1509 20.2747C4.92508 20.5011 4.62847 20.6143 4.33215 20.6143Z" fill="white"/>
                 </svg>
-
               span &nbsp; &nbsp; Присоединиться
+            div.btnContent(v-if="isEsc6() && webCamStream" v-bind:class="{handUp:handUp}" v-on:click="handUpClick()")
+                span
+                  <svg width="19px" height="20px" viewBox="0 0 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                  <desc>Created with Sketch.</desc>
+                  <defs></defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Desktop-HD" transform="translate(-461.000000, -30.000000)" fill="#ffffff" fill-rule="nonzero">
+                  <g id="mdi-hand-right" transform="translate(459.000000, 28.000000)">
+                  <g id="Icon">
+                  <path d="M21,6.58 L21,18.67 C21,20.5091082 19.5091082,22 17.67,22 L11.58,22 C10.68,22 9.83,21.64 9.21,21 L2.67,14.36 C2.67,14.36 3.72,13.33 3.75,13.32 C4.07119514,13.0340397 4.54077941,12.9895101 4.91,13.21 C4.94,13.22 8.5,15.26 8.5,15.26 L8.5,5.33 C8.5,4.63964406 9.05964406,4.08 9.75,4.08 C10.4403559,4.08 11,4.63964406 11,5.33 L11,11.17 L11.83,11.17 L11.83,3.25 C11.83,2.55964406 12.3896441,2 13.08,2 C13.78,2 14.33,2.56 14.33,3.25 L14.33,11.17 L15.17,11.17 L15.17,4.08 C15.17,3.39 15.72,2.83 16.42,2.83 C17.1103559,2.83 17.67,3.38964406 17.67,4.08 L17.67,11.17 L18.5,11.17 L18.5,6.58 C18.5,5.88964406 19.0596441,5.33 19.75,5.33 C20.4403559,5.33 21,5.88964406 21,6.58 Z" id="Icon-Shape"></path>
+                  <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="24" height="24"></rect>
+                  </g>
+                  </g>
+                  </g>
+                  </g>
+                  </svg>
+                span &nbsp; &nbsp; Хочу спросить
         div.Lbody
           div.videoWrapper
             <iframe width="560" height="315" src="https://www.youtube.com/embed/QbhAaWgUvrw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+            video(id="myVideo" muted autoplay  v-if="webCamStream")
+            video(id="remoteVideo"   v-if="webCamStream")
         div.Lfooter
       div.R
         div.Rwr

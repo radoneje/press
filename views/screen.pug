@@ -1,0 +1,25 @@
+extends layout
+block head
+  style.
+    body{
+      background: #EBEDEC;
+      color: #262626;
+      height: 100vh;
+    }
+block content
+  div.screenContainer(id="app")
+    //input(type="button" value="connect" v-on:click="startVideo()")
+    //input(type="button" value="disconnnect" v-on:click="stopVideo()")
+    video(id="userVideo"  autoplay)
+    video(id="speakerVideo" muted autoplay)
+
+  script.
+    var userId=!{JSON.stringify(user.id)};
+  script(src="/javascripts/screenScript.js")
+
+
+
+
+
+
+

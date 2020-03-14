@@ -24,6 +24,9 @@ router.get('/login', async (req, res, next)=> {
 router.get('/admin', adminLogin, function(req, res, next) {
   res.render('admin', { title: 'Admin page', user:req.session['user'] });
 });
+router.get('/admin/screen', adminLogin, function(req, res, next) {
+  res.render('screen', { title: 'Screen page', user:req.session['user'] });
+})
 
 function adminLogin(req, res, next){
   if(req.session['admin'])

@@ -93,7 +93,19 @@ block content
               div.llHalf
                 div.llInputBox
                   div.llSubmit(v-on:click="enter()")
-                    div Войти
+                    div(v-if="!loader") Войти
+                    div(v-if="loader")
+                      <svg style="width: 50px;" version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                      <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                      <animateattributeName="opacity"dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" / >
+                      </circle>
+                      <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                      <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2" / >
+                      </circle>
+                      <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                      <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3" / >
+                      </circle>
+                      </svg>
       div.llFooter Техподдержка:&nbsp;
           span +7 926 153 9608
     div.fullScreenBox(v-show="showSMS" style="display:none")
@@ -106,7 +118,19 @@ block content
           div.smsHeader Введите номер телефона
           input.smsNo(type='text' id='smsNo' placeholder="+7 (xxx) xxx-xx-xx" v-model="smsNo")
           div.smsSubmit(v-on:click="sendSms()")
-            div Получить код
+            div(v-if="!loader") Получить код
+            div(v-if="loader")
+                <svg style="width: 50px;" version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                <animateattributeName="opacity"dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" / >
+                </circle>
+                <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2" / >
+                </circle>
+                <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3" / >
+                </circle>
+                </svg>
         div(v-show='smsIsSend')
           div.smsHeader Введите код из СМС
             div.smsInpBox(v-bind:class="{warning:smsRetErr}")

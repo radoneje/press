@@ -13,6 +13,14 @@ new Vue({
         users:[],
     },
     methods: {
+        startShow:function(item){
+            console.log("startBroadcast", item.id)
+            sendToServer(item.id,"startBroadcastToClient")
+        },
+        stopShow:function(){
+            console.log("startBroadcast")
+            sendToServer(0,"stopBroadcastToClient")
+        },
         changeSection:function(item){
             var _this=this;
             this.menu.forEach(function (e) {
@@ -89,7 +97,16 @@ new Vue({
                 .then(function (r) {
 
                 })
+        },
+        showHideJpg:function(item){
+            var elem= document.getElementById('jpgWr_'+item.id)
+            if(elem)
+            {
+                elem.style.display=item.jpgShow?"none":"block";
+                item.jpgShow=!item.jpgShow;
+            }
         }
+
     },
     mounted: async function () {
       var _this=this;
@@ -110,7 +127,7 @@ new Vue({
             .then(function (r) {
                 _this.users=r.data;
             })
-        connect(_this);
+        connect(_this, true);
 
     }
 });

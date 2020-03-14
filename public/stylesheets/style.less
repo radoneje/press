@@ -838,3 +838,80 @@ padding: 4px 10px;
   color: #28BA54;
   margin-right: 15px;
 }
+#myVideo,#remoteVideo{
+  width: 25%;
+  /* height: 215px; */
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  box-shadow: 0px 0px 15px 0px black;
+  z-index: 100;
+}
+#remoteVideo{
+  right: 0;
+  width: 100%;
+  left: 0;
+  top: 0;
+  box-shadow: none;
+  z-index: 1;
+  display: none;
+}
+.userJpgWr{
+  position: relative;
+}
+.userJpgControls{
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
+  opacity: .3;
+}
+.userJpgControls:hover{
+  opacity: 1;
+}
+.clearBtn {
+  font-size: 14px;
+  padding: 0px 10px;
+  padding-top: 10px;
+  margin-left: 20px;
+  margin-top: 3px;
+  height: 23px;
+  width: max-content;
+}
+@keyframes flik {
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: .2;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+.handUp{
+  background: #f59625;
+
+  padding: 5px;
+  border-radius: 4px;
+  transition: opacity .5s ease;
+  animation: flik 1s infinite ;
+}
+.userHandUp path{
+  fill:#f59625 !important;
+}
+.userHandUp{
+  position: absolute;
+  left: 15px;
+  top: 50px;
+  transition: opacity .5s ease;
+  animation: flik 1s infinite ;
+}
+#speakerVideo{
+  position: absolute;
+  top: -1000px;
+}
+#userVideo{
+  width: 100%;
+}
+

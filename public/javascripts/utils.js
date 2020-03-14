@@ -1,3 +1,4 @@
+var socket;
 function log(text) {
     var time = new Date();
     console.log("[" + time.toLocaleTimeString() + "] " + text);
@@ -11,7 +12,7 @@ if (!myHostname) {
     myHostname = "localhost";
 }
 log("Hostname: " + myHostname);
-function connect(_this){
+function connect(_this, m){
     var serverUrl;
     var scheme = "http";
     if (document.location.protocol === "https:") {
@@ -19,10 +20,10 @@ function connect(_this){
     }
     serverUrl = document.location.protocol + "//" + myHostname;
     log(`Connecting to server: ${serverUrl}`);
-    var socket = io('http://localhost');
+    socket = io('http://localhost');
     socket.on('connect', function() {
         log("connection.onopen")
-        socket.emit("hello", userId);
+        socket.emit("hello",{id:userId, m:m});
         sendToServer=function (data, type) {
             socket.emit(type||"roomVideoMessage", data);
         }
@@ -55,6 +56,7 @@ function connect(_this){
             _this.users.forEach(function (user) {
                 if(user.id==userid)
                     user.isActive=false;
+                    user.jpg=null;
             })
         });
         socket.on("chatAdd", (data)=>{
@@ -86,6 +88,108 @@ function connect(_this){
             console.log("qStatus", _this.q)
 
         });
+        socket.on("videoSnapshot", (data)=>{
+            _this.users.forEach(function (user) {
+                if(user.id==data.id) {
+                    user.jpg = data.jpg;
+                    setTimeout(function () {
+                        var elem = document.getElementById('jpg_' + data.id)
+                        if (elem)
+                            elem.src = user.jpg;
+
+                    }, 0)
+                }
+            })
+            _this.users=_this.users.filter(function () {
+                return true;
+            })
+
+        })
+        socket.on("stopVideo", (data)=> {
+            _this.users.forEach(function (user) {
+                if(user.id==data.id)
+                    user.jpg=null;
+            })
+            console.log("videoEnded");
+            _this.users=_this.users.filter(function () {
+                return true;
+            })
+        });
+        socket.on("startVideoChat", (data)=> {
+
+            var video=document.getElementById("myVideo")
+            if(video  && video.srcObject)
+                startBroadcast(_this, data, video);
+
+        })
+        socket.on("stopVideoChat", (data)=> {
+
+            var video=document.getElementById("myVideo")
+            if(video  && video.srcObject)
+                stopBroadcast(_this, data, video);
+
+        })
+
+        socket.on("videoOffer", (data)=> {
+
+            console.log("vf 1")
+            if(typeof(_this.videoOffer)){
+                console.log("vf2")
+                _this.videoOffer(data)
+            }
+        })
+        socket.on("videoAnswer", (data)=> {
+            if(typeof(videoAnswer)!='undefined'){
+                videoAnswer(data)
+            }
+            if(typeof(_this.videoAnswer)!='undefined'){
+                _this.videoAnswer(data)
+            }
+        })
+        socket.on("icecandidate", (data)=> {
+
+            if(typeof(videoIce)!='undefined'){
+                videoIce(data)
+            }
+            if(typeof(_this.videoIce)!='undefined'){
+                _this.videoIce(data)
+            }
+        })
+        socket.on("icecandidate2", (data)=> {
+                console.log("va2 111")
+            if(typeof(videoIce)!='undefined'){
+                videoIce2(data)
+            }
+            if(typeof(_this.videoIce)!='undefined'){
+                _this.videoIce2(data)
+            }
+        })
+        socket.on("startBroadcastToClient", (data)=> {
+            if(typeof(_this.startBroadcastToClient)!='undefined'){
+                _this.startBroadcastToClient(data)
+            }
+        });
+        socket.on("stopBroadcastToClient", (data)=> {
+            if(typeof(_this.stopBroadcastToClient)!='undefined'){
+                _this.stopBroadcastToClient(data)
+            }
+        });
+        socket.on("userHandup", (data)=> {
+            _this.users.forEach(function (user) {
+                if(user.id==data.id)
+                    user.handup=data.handup;
+            })
+            console.log("userHandup");
+            _this.users=_this.users.filter(function () {
+                return true;
+            })
+        });
+
+
+
+
+
+
 
     })
 }

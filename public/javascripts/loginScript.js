@@ -17,7 +17,8 @@ new Vue({
         smsRet:"",
         userId:null,
         showSMS:false,
-        smsRetErr:false
+        smsRetErr:false,
+        loader:false
 
     },
     methods: {
@@ -44,21 +45,26 @@ new Vue({
             { console.log(this.smi, this.fErr , this.iErr , this.codeErr , this.smiErr);  return;}
 
             console.log('try check code');
+            _this.loader=true;
             axios.post("/rest/api/checkCode/",{code:parseInt(this.code), id:this.smi.id})
                 .then(function (res) {
                     if(!res.data)
-                    {_this.code=""; _this.codeErr=true; document.getElementById('lCode').focus(); return; }
+                    {_this.code=""; _this.codeErr=true; document.getElementById('lCode').focus(); _this.loader=false;return; }
                     _this.showSMS=true;
+                    _this.loader=false;
                 })
         },
         sendSms:function () {
             var _this=this;
+            console.log(this.smsNo);
             if (!this.smsNo.match(/^\+\d\s\(\d\d\d\)\s\d\d\d\s\d\d\d\d$/))
                 return;
             var m = this.smsNo.match(/^\+(\d)\s\((\d\d\d)\)\s(\d\d\d)\s(\d\d\d\d)$/);
             var n="+"+m[1]+m[2]+m[3]+m[4];
+            this.loader=true;
             axios.post("/rest/api/sendSms",{f:this.f, i:this.i, smi:this.smi, tel:n})
                 .then(function (ret) {
+                    this.loader=false;
                     if(!ret.data)
                     { this.smsNo=""; document.getElementById('smsNo').focus();return; }
                     console.log("sended ", n);
@@ -77,6 +83,7 @@ new Vue({
                 this.smsRetErr=true;
                 return;
             }
+            _this.loader=true
             axios.post("/rest/api/checkSMS/",{id:this.userId, code:this.smsRet})
             .then(function (r) {
                 if(!r.data)
@@ -84,10 +91,11 @@ new Vue({
                     _this.smsRet="";
                     _this.smsRetErr=true;
                     document.getElementById("smsRet").focus();
+                    _this.loader=false;
                     return;
                 }
                 else
-                    document.location.href="/";
+                   setTimeout(function(){ document.location.href="/"}, 1000);
             })
         }
     },

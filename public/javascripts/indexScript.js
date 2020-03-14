@@ -7,9 +7,19 @@ new Vue({
         q:[],
         chat:[],
         users:[],
-        activeSection:2
+        activeSection:2,
+        webCamStream:null,
+        handUp:false,
     },
     methods: {
+        handUpClick:function(){
+            console.log("handUpClick")
+            if(this.handUp)
+                this.handUp=false
+            else
+                this.handUp=true;// this.handUp;
+            axios.post("/rest/api/handup",{id:userId,handUp:this.handUp});
+        },
         sectActive:function (item) {
             var _this=this;
             this.sect.forEach(function (e) {
@@ -33,6 +43,47 @@ new Vue({
         chatAddSmile:function () {
             this.chatText+=" :) ";
             document.getElementById("chatText").focus();
+        },
+        isEsc6:function () {
+            try { eval('"use strict";const s=()=>{console.log("esc6")}; s();'); return true}
+            catch (e)
+            { console.log(e);
+            return false
+            }
+        },
+        startRTC:function () {
+            var _this=this;
+            if(typeof (initCam)=='undefined')
+            {
+                var s = document.createElement('script');
+                s.src = "/javascripts/rtcScript.js";
+                s.type = "text/javascript";
+                s.async = false;
+                s.onload=function (){
+                    getStream();
+                }// <-- this is important
+                document.getElementsByTagName('head')[0].appendChild(s);
+            }
+            else
+                getStream();
+            function getStream(){
+                initCam(_this)
+                    .then(function (stream) {
+                        _this.webCamStream=stream;
+                        setTimeout(function () {
+                            var video=document.getElementById("myVideo")
+                                video.srcObject=_this.webCamStream;
+                            var remoteVideo=document.getElementById("remoteVideo")
+                            startSnap(video, _this);
+                            startConf(video,remoteVideo, _this)
+                            remoteVideo.addEventListener("playing", function () {
+                                remoteVideo.style.display="block"
+                            })
+
+                            }, 0)
+                    })
+            }
+
         }
     },
     mounted:  function () {
