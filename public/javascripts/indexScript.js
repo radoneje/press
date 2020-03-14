@@ -82,7 +82,7 @@ new Vue({
                                // alert(123)
                                 remoteVideo.style.display="block";
                                 YTplayer.mute();
-                                console.log("remoteVideo ON", YTplayer.isMutedYTplayer.isMuted)
+                                console.log("remoteVideo ON", YTplayer.isMuted)
                                 //alert(YTplayer.isMuted)
 
                             })
