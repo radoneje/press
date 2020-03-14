@@ -45,7 +45,7 @@ new Vue({
             document.getElementById("chatText").focus();
         },
         isEsc6:function () {
-            try { eval('"use strict";const s=()=>{console.log("esc6")}; s();'); return true}
+            try { eval('"use strict";const s=()=>{;;}; s();'); return true}
             catch (e)
             { console.log(e);
             return false
