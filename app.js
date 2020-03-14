@@ -13,7 +13,10 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
 var clients=[];
-const emit=(event, data)=>{console.log("emit ", event); clients.forEach(cl=>{if(cl.isActive) cl.socket.emit(event,data)})};
+const emit=(event, data)=>{console.log("emit ", event); clients.forEach(cl=>{
+  console.log("client ", cl.is, cl.isActive)
+  if(cl.isActive) cl.socket.emit(event,data)
+})};
 
 var knex = require('knex')({
   client: 'pg',
