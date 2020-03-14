@@ -1,3 +1,4 @@
+var YTplayer;
 new Vue({
     el: '#app',
     data: {
@@ -10,7 +11,7 @@ new Vue({
         activeSection:2,
         webCamStream:null,
         handUp:false,
-        YTplayer:null
+
     },
     methods: {
         handUpClick:function(){
@@ -79,7 +80,9 @@ new Vue({
                             startConf(video,remoteVideo, _this)
                             remoteVideo.addEventListener("playing", function () {
                                 remoteVideo.style.display="block";
-                                _this.YTplayer.mute()
+                                YTplayer.mute();
+                                //alert(YTplayer.isMuted)
+
                             })
 
                             }, 0)
@@ -93,20 +96,8 @@ new Vue({
 
         var player;
 
-        function onYouTubeIframeAPIReady() {
-            console.log(" onYouTubeIframeAPIReady();")
-            _this.YTplayer = new YT.Player('player', {
-                height: '360',
-                width: '640',
-                videoId: 'QbhAaWgUvrw',
-                host: 'https://www.youtube.com',
-                events: {
-                   // 'onReady': onPlayerReady,
-                   // 'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-        setTimeout(onYouTubeIframeAPIReady,1000)
+
+      //  setTimeout(onYouTubeIframeAPIReady,1000)
 
         connect(_this);
         axios.get("/rest/api/quest")
@@ -126,6 +117,20 @@ new Vue({
     }
 
 });
+
+function onYouTubeIframeAPIReady() {
+    console.log(" onYouTubeIframeAPIReady();")
+    YTplayer = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: 'QbhAaWgUvrw',
+        host: 'https://www.youtube.com',
+        events: {
+            // 'onReady': onPlayerReady,
+            // 'onStateChange': onPlayerStateChange
+        }
+    });
+}
 
 
 
