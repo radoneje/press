@@ -60,6 +60,7 @@ function connect(_this, m){
             })
         });
         socket.on("chatAdd", (data)=>{
+            console.log("chatAdd");
             _this.chat.push(data);
             setTimeout(function () {
                 var objDiv = document.getElementById("chatBox");
