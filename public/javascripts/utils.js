@@ -19,8 +19,8 @@ function connect(_this, m){
         scheme += "s";
     }
     serverUrl = document.location.protocol + "//" + myHostname;
-    log(`Connecting to server: ${serverUrl}`);
-    socket = io('http://localhost');
+    log('Connecting to server:' + serverUrl);
+    socket = io(serverUrl);
     socket.on('connect', function() {
         log("connection.onopen")
         socket.emit("hello",{id:userId, m:m});
