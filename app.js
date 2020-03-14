@@ -13,7 +13,7 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 
 var clients=[];
-const emit=(event, data)=>{console.log("emit ", event,clients.length ); clients.forEach(cl=>{
+const emit=(event, data)=>{console.log("emit2 ", event,clients.length ); clients.forEach(cl=>{
   console.log("client ", cl.is, cl.isActive)
   if(cl.isActive) cl.socket.emit(event,data)
 })};
