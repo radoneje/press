@@ -5,6 +5,7 @@ block head
       background: #EBEDEC;
       color: #262626;
     }
+  script(src="https://www.youtube.com/iframe_api")
 block content
   div(id="app")
     div.head
@@ -81,7 +82,8 @@ block content
                 span &nbsp; &nbsp; Хочу спросить
         div.Lbody
           div.videoWrapper
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/QbhAaWgUvrw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            div(id="player")
+            //<iframe width="560" height="315" src="https://www.youtube.com/embed/QbhAaWgUvrw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             video(id="myVideo" muted autoplay  v-if="webCamStream")
             video(id="remoteVideo"   v-if="webCamStream")
         div.Lfooter

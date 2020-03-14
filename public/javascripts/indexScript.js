@@ -10,6 +10,7 @@ new Vue({
         activeSection:2,
         webCamStream:null,
         handUp:false,
+        YTplayer:null
     },
     methods: {
         handUpClick:function(){
@@ -77,7 +78,8 @@ new Vue({
                             startSnap(video, _this);
                             startConf(video,remoteVideo, _this)
                             remoteVideo.addEventListener("playing", function () {
-                                remoteVideo.style.display="block"
+                                remoteVideo.style.display="block";
+                                _this.YTplayer.mute()
                             })
 
                             }, 0)
@@ -88,6 +90,24 @@ new Vue({
     },
     mounted:  function () {
         var _this=this;
+
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            console.log(" onYouTubeIframeAPIReady();")
+            _this.YTplayer = new YT.Player('player', {
+                height: '360',
+                width: '640',
+                videoId: 'QbhAaWgUvrw',
+                host: 'https://www.youtube.com',
+                events: {
+                   // 'onReady': onPlayerReady,
+                   // 'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        setTimeout(onYouTubeIframeAPIReady,1000)
+
         connect(_this);
         axios.get("/rest/api/quest")
             .then(function (r) {

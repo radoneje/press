@@ -161,6 +161,7 @@ function stopBroadcast(_this, data, video) {
     console.log("stop broadcasdt")
     remoteVideo.srcObject=null;
     remoteVideo.style.display="none"
+    _this.YTplayer.unMute()
     pcSpk=null;
 }
 function startBroadcast(_this, data, video){
