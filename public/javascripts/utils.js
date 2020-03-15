@@ -183,6 +183,7 @@ function connect(_this, m){
             }
         });
         socket.on("showUploadedVideo", (data)=> {
+            console.log("showUploadedVideo",data)
             if(typeof(_this.StartShowUploadedVideo)!='undefined'){
                 _this.StartShowUploadedVideo(data)
             }
