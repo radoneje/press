@@ -50,7 +50,7 @@ new Vue({
             document.body.appendChild(video);
         },
         stopBroadcastToClient:function(){
-            this.startVideo();
+            //this.startVideo();
             this.pcUser=null;
             this.pc2=null;
             document.getElementById('userVideo').srcObject=null;
