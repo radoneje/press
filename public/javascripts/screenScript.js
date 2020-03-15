@@ -59,7 +59,7 @@ new Vue({
             this.pc2=null;
             document.getElementById('userVideo').srcObject=null;
             sendToServer({userid:userId/*кому посылаем команду*/ }, "stopVideoChat")
-            var videoWr=document.getElementById('screenUpladedVideo')
+            var videoWr=document.getElementById('screenUpladedVideoWr')
             if(videoWr){
                 videoWr.parentNode.removeChild(videoWr)
             }
@@ -72,9 +72,9 @@ new Vue({
             this.pcUser=null;
             this.pc2=null;
             sendToServer({userid:userId/*кому посылаем команду*/ }, "stopVideoChat")
-            var video=document.getElementById('screenUpladedVideo')
-            if(video){
-                video.parentNode.removeChild(video)
+            var videoWr=document.getElementById('screenUpladedVideoWr')
+            if(videoWr){
+                videoWr.parentNode.removeChild(video)
             }
         },
 
