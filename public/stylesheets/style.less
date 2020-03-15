@@ -626,7 +626,7 @@ width: 128px;
 .center{
   width: ~"calc(100% - 40px)";
   max-width: 1792px;
-
+display: flex;
   padding: 25px 20px;
   margin: 0 auto;
 }
@@ -686,7 +686,7 @@ width: 128px;
 .Rwr{
   position: relative;
   padding-bottom: 145.25%;/* 16:9 */
-  height: 0;
+  //height: 0;
 }
 .rContent{
   position: absolute;
@@ -720,10 +720,9 @@ width: 128px;
 }
 .rFooter{
   height: 48px;
-  bottom:0;
+  bottom:-50px;
   border-top:1px solid #C9CBCD;
   height: 48px;
-  bottom: 0;
   border-top: 1px solid #C9CBCD;
   position: absolute;
   width: 100%
@@ -809,7 +808,8 @@ text-align: right;
   margin-top:5px;
 }
 .rContentWr{
-  height: ~"calc(100% - 104px)";
+  //height: ~"calc(100% - 104px)";
+  height: ~"calc(100% - 50px)";
 }
 .userItem{
   padding-left: 55px;
@@ -914,4 +914,229 @@ padding: 4px 10px;
 #userVideo{
   width: 100%;
 }
+
+@media only screen and (max-width: 1440px) {
+  .lTopRBox {
+    position: absolute;
+    right: 170px;
+    top: 0;
+    height: 100%;
+    width: 206px;
+  }
+  .lTopRBox img{
+    width: 405px !important;
+    height: auto !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .lTopTitle {
+    font-size: 28px;
+    line-height: 35px;
+  }
+
+  .lTopLid {
+    font-size: 20px;
+    line-height: 32px;
+    margin-top: 24px;
+  }
+
+  .lTopL {
+    width: 60%;
+  }
+
+  .lTopR {
+    width: 40%;
+  }
+
+  .lColTower {
+    padding-right: 0;
+    margin-right: 0;
+    width: ~"calc(100% - 56px)";
+  }
+
+  .lTopRBox {
+    position: absolute;
+    right: 170px;
+    top: 0;
+    height: 100%;
+    width: 206px;
+  }
+  .lTopRBox img{
+    width: 405px !important;
+    height: auto !important;
+  }
+
+.lBottom {
+display: block;
+min-height: inherit;
+}
+.lBottom .lTopL, .lBottom .lTopR{
+width: 100%;
+}
+.lBottom .lColTower{
+padding: 32px 32px;
+padding-top: 0;
+width: ~"calc(100% - 64px)";
+}
+.llInputBox{
+margin-right: 15px;
+}
+
+.center{
+  padding: 0;
+  width: 100%;
+}
+.L{
+  width: 66%;
+  margin-right: 0;
+  border-radius: 0;
+}
+.R{
+  width: 34%;
+  border-radius: 0;
+  height: ~"calc(100vh - 42px)";
+
+}
+.rContentWr{
+  height: ~"calc(100vh - 105px)";
+}
+.Rwr{
+ // height: 100%;
+}
+  .rBody {
+
+    height: ~"calc(100% - 40px)";
+  }
+.rFooter{
+  bottom: auto;
+}
+.headTitle{
+  font-size: 14px;
+  line-height: 22px;
+}
+.rHeadItem{
+  font-size: 14px;
+  line-height: 17px;
+}
+.qItemSmi, .qItemName,.qItemText{
+  font-size: 14px;
+  line-height: 17px;
+}
+.qItem{
+  padding: 10px;
+}
+#userBox .qItem{
+  padding-left: 50px;
+}
+.userItemAvatar{
+  left: 10px;
+}
+}
+@media only screen and (max-width: 768px) {
+  .lTopWr {
+    display: block;
+  }
+
+  .lTopL {
+    width: 100%;
+  }
+
+  .lTopTitle {
+    margin-top: 32px
+  }
+
+  .lColTower {
+    padding: 32px;
+    padding-right: 32px;
+    width: ~"calc(100% - 64px)";
+  }
+
+  .lTopTitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .lTopLid {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 100;
+  }
+  .lTop{
+    height: auto;
+  }
+  .lTopR{
+    width: 100%;
+  }
+  .lTopRBox{
+    position: inherit;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: right;
+  }
+  .lTopRBox img{
+    margin-bottom: -90px;
+  }
+  .lTopRBoxShadow {
+    position: absolute;
+    right: -130px;
+    top: -60px;
+    height: 100%;
+    width: 100%;
+
+  }
+  .llBox{
+    display: block;
+  }
+  .llHalf{
+    width: 100%;
+  }
+  .head{
+    display: block;
+  }
+  .headLogo{
+    display: none;
+  }
+  .headTitle{
+    position: initial;
+  }
+  .headSupport{
+    position: initial;
+    display: none;
+  }
+  .center {
+    display: block;
+
+  }
+  .L,.R{
+    width: 100%;
+  }
+  .btnContentLbl{
+    display: none;
+  }
+  .greenBtn{
+    width: max-content;
+    padding: 10px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 15px;
+    margin-bottom: 56px;
+  }
+  .Lhead{
+    justify-content: flex-end;
+    height: 0;
+  }
+  .Lfooter{
+    display: none;
+  }
+  .headBox{
+    width: calc(100% - 48px);
+  }
+}
+
+
 
