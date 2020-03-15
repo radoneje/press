@@ -35,19 +35,23 @@ new Vue({
         StartShowUploadedVideo:function(data){
             console.log("StartShowUploadedVideo 2", data)
 
-            var video=document.getElementById('screenUpladedVideo')
-            if(video){
+            var videoWr=document.getElementById('screenUpladedVideoWr')
+            if(videoWr){
                 video.parentNode.removeChild(video)
             }
-            video=document.createElement('video')
+            var videoWr=document.createElement('div')
+            videoWr.id="screenUpladedVideoWr"
+
+            var video=document.createElement('video')
             video.onloadedmetadata=function(){video.play()}
-            video.onplaying=function(){video.classList.add("active")}
+            video.onplaying=function(){videoWr.classList.add("active")}
             video.preload="metadata";
-            video.onended=function(){video.parentNode.removeChild(video)}
+            video.onended=function(){videoWr.parentNode.removeChild(videoWr)}
             video.src='/uploads/'+data;
             video.id="screenUpladedVideo"
             video.classList.add("screenUpladedVideo")
-            document.body.appendChild(video);
+            videoWr.appendChild(video)
+            document.body.appendChild(videoWr);
         },
         stopBroadcastToClient:function(){
             //this.startVideo();
@@ -55,9 +59,9 @@ new Vue({
             this.pc2=null;
             document.getElementById('userVideo').srcObject=null;
             sendToServer({userid:userId/*кому посылаем команду*/ }, "stopVideoChat")
-            var video=document.getElementById('screenUpladedVideo')
-            if(video){
-                video.parentNode.removeChild(video)
+            var videoWr=document.getElementById('screenUpladedVideo')
+            if(videoWr){
+                videoWr.parentNode.removeChild(videoWr)
             }
         },
         startBroadcastToClient:function(toUserId){

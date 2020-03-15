@@ -985,15 +985,17 @@ position: absolute;
     margin: 0 auto;
     text-shadow: 0px 0px 5px white;
 }
-.screenUpladedVideo{
+#screenUpladedVideoWr{
   position: fixed;
   z-index: 10;
   top:-1000px;
   left: 0;
-  height: 100%;
-
+  height: 100vh;
 }
-.screenUpladedVideo.active{
+.screenUpladedVideo{
+  height: 100%;
+}
+#screenUpladedVideoWr.active{
   top:0;
 }
 .userJpg{
