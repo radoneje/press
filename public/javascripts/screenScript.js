@@ -36,8 +36,9 @@ new Vue({
             console.log("StartShowUploadedVideo 2", data)
             var video=document.createElement('video')
 
-            video.loadedmetadata=function(){video.play()}
+            video.loadedmetadata=function(){connsole.log("load metadata");video.play()}
             video.onplaying=function(){video.classList.add("active")}
+            video.preload="metadata";
             video.onended=function(){video.parentNode.removeChild(video)}
             video.src='/uploads/'+data;
             video.id="screenUpladedVideo"
