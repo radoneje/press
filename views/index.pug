@@ -109,16 +109,27 @@ block content
                     span {{moment(item.date).format("HH:MM")}}
               div.rFooter
                 div.askWr
-                  input.ask(placeholder="Напишите Ваш вопрос" v-model="qText" v-on:keydown="qtextChange($event)")
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg v-on:click="qFileClick()" style="cursor:pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.5 8C1.5 7.17157 2.17157 6.5 3 6.5H12C12.8284 6.5 13.5 7.17157 13.5 8V16C13.5 16.8284 12.8284 17.5 12 17.5H3C2.17157 17.5 1.5 16.8284 1.5 16V8Z" stroke="#9A9A9A"/>
                   <path d="M22.0992 5.00042C22.3496 5.16734 22.5 5.44833 22.5 5.74924V18.2508C22.5 18.5517 22.3496 18.8327 22.0992 18.9996C21.7655 19.222 21.3249 19.1968 21.0187 18.9378L16.0311 14.7175C15.6943 14.4325 15.5 14.0136 15.5 13.5724V10.4276C15.5 9.98637 15.6943 9.56752 16.0311 9.28252L21.0187 5.06222C21.3249 4.80315 21.7655 4.77795 22.0992 5.00042Z" stroke="#9A9A9A"/>
                   </svg>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 7.99902V12.2314C20 15.9695 16.8372 18.9999 12.9392 18.9999H12.0608C8.16121 18.9999 5 15.9654 5 12.2314V7.99902V7.99902" stroke="#9A9A9A"/>
-                  <rect x="8.5" y="1.5" width="8" height="14" rx="2.5" stroke="#9A9A9A"/>
-                  <path d="M12.6484 18.6797V23.7894" stroke="#9A9A9A"/>
+                  input.ask(placeholder="Напишите Ваш вопрос" id="qText" v-model="qText" v-on:keypress="qtextChange($event)")
+                  <svg class="svgSendBtn" v-on:click="qtextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                  <desc>Created with Sketch.</desc>
+                  <defs></defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
+                  <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
+                  <g id="Icon">
+                  <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
+                  <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                  </g>
+                  </g>
+                  </g>
+                  </g>
                   </svg>
+
             div.rContentWr(v-if="activeSection==2")
               div.rBody(id="chatBox" )
                 div.qItem(v-for="item in chat" v-bind:class="{my:(item.userid==userId)}")
@@ -134,7 +145,22 @@ block content
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 11C16.3284 11 17 10.1046 17 9C17 7.89543 16.3284 7 15.5 7C14.6716 7 14 7.89543 14 9C14 10.1046 14.6716 11 15.5 11Z" fill="#9A9A9A"/>
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M6.37027 13.5247C6.27006 13.3332 6.41166 13.116 6.62779 13.116H18.5288C18.7536 13.116 18.8943 13.3497 18.7776 13.5418C18.0473 14.7436 15.7228 18.0745 12.3926 18.0745C9.0464 18.0745 6.99138 14.7116 6.37027 13.5247Z" stroke="#9A9A9A"/>
                   </svg>
-                  input.ask(placeholder="Напишите Ваше сообщение" id="chatText" v-model="chatText" v-on:keydown="chattextChange($event)")
+                  input.ask(placeholder="Напишите Ваше сообщение" id="chatText" v-model="chatText" v-on:keypress="chattextChange($event)")
+                  <svg class="svgSendBtn" v-on:click="chattextSend()" width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                  <desc>Created with Sketch.</desc>
+                  <defs></defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero">
+                  <g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)">
+                  <g id="Icon">
+                  <polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon>
+                  <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                  </g>
+                  </g>
+                  </g>
+                  </g>
+                  </svg>
             div.rContentWr(v-if="activeSection==3")
               div.rBody(id="userBox" )
                 div.qItem.userItem(v-for="item in users" v-bind:class="{active:(item.isActive)}")

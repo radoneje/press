@@ -12,14 +12,37 @@ new Vue({
         chat:[],
         users:[],
     },
-    methods: {
-        startShow:function(item){
-            console.log("startBroadcast", item.id)
-            sendToServer(item.id,"startBroadcastToClient")
+    computed: {
+        users: function() {
+            return this.users;
         },
-        stopShow:function(){
+        q: function() {
+            return this.q;
+        },
+        chat: function() {
+            return this.chat;
+        },
+    },
+    methods: {
+        startShow:function(item, event){
+
+            var c=event.currentTarget;
+            c.classList.add("clicked");
+            setTimeout(function () {
+                c.classList.remove("clicked");
+            }, 2000);
+            console.log("startBroadcast", item.id, )
+            sendToServer(item.id,"startBroadcastToClient")
+
+        },
+        stopShow:function(event){
+            var c=event.currentTarget;
             console.log("startBroadcast")
             sendToServer(0,"stopBroadcastToClient")
+            c.classList.add("clicked");
+            setTimeout(function () {
+                c.classList.remove("clicked");
+            }, 2000);
         },
         changeSection:function(item){
             var _this=this;

@@ -13,14 +13,53 @@ new Vue({
         handUp:false,
 
     },
+    computed: {
+        users: function() {
+            return this.users;
+        },
+        q: function() {
+            return this.q;
+        },
+        chat: function() {
+            return this.chat;
+        },
+    },
     methods: {
+        qFileClick:function(){
+            var elem= document.createElement("input");
+            elem.type="file"
+            elem.style.display="none";
+            elem.accept="video/*;capture=camcorder";
+            elem.onchange=function(){
+                console.log(elem.files[0])
+                var fd = new FormData();
+                fd.append('file', elem.files[0]);
+                axios({
+                    method: 'post',
+                    url: '/fileUpload',
+                    data: fd,
+                    headers: {'Content-Type': 'multipart/form-data' }
+                });
+
+                elem.parentNode.removeChild(elem)
+            }
+            document.body.appendChild(elem);
+
+            elem.click();
+        },
         handUpClick:function(){
             console.log("handUpClick")
+            var _this=this;
             if(this.handUp)
                 this.handUp=false
             else
                 this.handUp=true;// this.handUp;
             axios.post("/rest/api/handup",{id:userId,handUp:this.handUp});
+            if(_this.handUp)
+                setTimeout(function () {
+                    _this.handUp=false;
+                    axios.post("/rest/api/handup",{id:userId,handUp:_this.handUp});
+                }, 3*60*1000);
         },
         sectActive:function (item) {
             var _this=this;
@@ -34,12 +73,33 @@ new Vue({
         },
         qtextChange:function (e) {
             var _this=this;
-            qtextChange(_this,e)
+            if(this.qText.length>0)
+                qtextChange(_this,e)
+            else
+                document.getElementById('qText').focus()
 
+        },
+        qtextSend:function (e) {
+            var _this=this;
+            if(this.qText.length>0)
+                qtextSend(_this)
+            else
+                document.getElementById('qText').focus()
+
+
+        },
+        chattextSend(_this){
+            if(this.chatText.length>0)
+            chattextSend(this) ;
+            else
+                document.getElementById('chatText').focus()
         },
         chattextChange:function (e) {
             var _this=this;
+            if(this.chatText.length>0)
             chattextChange(_this, e);
+            else
+                document.getElementById('chatText').focus()
 
         },
         chatAddSmile:function () {

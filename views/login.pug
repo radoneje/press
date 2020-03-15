@@ -87,7 +87,7 @@ block content
                       div.llSmiItem(v-on:click="smiSelect(item)" v-for="item in smiList" v-bind:class="{selected:item.id==smi.id}") {{item.title}}
                 div.llInputBox(v-bind:class="{warning:(codeErr && !checkCode(code))}")
                   div.llInputBoxLabel
-                    input(placeholder='Код аккредитации' v-model="code" id="lCode")
+                    input(placeholder='Код аккредитации' v-model="code" id="lCode" v-on:keydown="if($event.keyCode==13) enter()")
                   div.llInputBoxWarning Код акредитации указан неверно
             div.llBox(style="margin-top:0")
               div.llHalf
@@ -116,7 +116,7 @@ block content
         </svg>
         div(v-show='!smsIsSend')
           div.smsHeader Введите номер телефона
-          input.smsNo(type='text' id='smsNo' placeholder="+7 (xxx) xxx-xx-xx" v-model="smsNo")
+          input.smsNo(type='text' id='smsNo' placeholder="+7 (xxx) xxx-xx-xx" v-model="smsNo" autocomplete="off" maxlength="25" v-on:keydown="if($event.keyCode==13) sendSms()")
           div.smsSubmit(v-on:click="sendSms()")
             div(v-if="!loader") Получить код
             div(v-if="loader")
@@ -134,7 +134,7 @@ block content
         div(v-show='smsIsSend')
           div.smsHeader Введите код из СМС
             div.smsInpBox(v-bind:class="{warning:smsRetErr}")
-              input.smsNo(type='text' id='smsRet' placeholder="" v-model="smsRet")
+              input.smsNo(type='text' id='smsRet' placeholder="" v-model="smsRet" maxlength="255" v-on:keydown="if($event.keyCode==13 && smsRet.length>4) checkSms()")
               div.llInputBoxWarning Код из СМС указан неверно
             div.smsSubmit(v-show="checkCode(smsRet)" v-on:click="checkSms()")
               div(v-if="!loader") Проверить

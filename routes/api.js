@@ -61,7 +61,7 @@ router.post("/sendSms",async (req, res, next)=> {
   console.log(url)
   var rr= await axios.get(url);
   console.log("req compl")
-  console.log(rr.data)
+ // console.log(rr.data)
 
 
   res.json(r[0].id);
@@ -75,6 +75,9 @@ router.post("/checkSMS",async (req, res, next)=> {
 
    r=await req.knex("t_users").update({isConfirm:true, confirmdate:(new Date())}, "*")
        .where({ id:req.body.id});
+    var u=await req.knex.select("*").from("v_users").where({id:r[0].id});
+
+   req.emit("newUser", u[0]);
    req.session["user"]=r[0];
     res.json(r[0].id);
   }
@@ -110,7 +113,8 @@ router.get("/chat",login,async (req, res, next)=> {
 })
 
 router.get("/users",login,async (req, res, next)=> {
-  var r=await req.knex.select("*").from("v_users");//.orderBy(["f","i"]).where({isDeleted:false, isConfirm:true});// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
+ //.orderBy(["f","i"]).where({isDeleted:false, isConfirm:true});// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
+  var r=await req.knex.select("*").from("v_users");
   r.forEach(u=>{
     req.clients.forEach(c=>{
       if(c.userid==u.id /*&& c.isActive==true*/)
@@ -144,6 +148,14 @@ router.post("/handup",login,async (req, res, next)=> {
   console.log("handup",req.body);
   var r=await req.knex("t_users").update({handup:req.body.handUp}, "*").where({id:req.body.id});
   req.emit("userHandup",{id:r[0].id, handup:req.body.handUp });
+  var _this=req.body;
+  if(_this.handUp)
+    setTimeout(async function () {
+      _this.handUp=false;
+      var r=await req.knex("t_users").update({handup:req.body.handUp}, "*").where({id:req.body.id});
+      req.emit("userHandup",{id:r[0].id, handup:req.body.handUp });
+    }, 3*60*1000);
+
   res.json(r[0].id)
 })
 

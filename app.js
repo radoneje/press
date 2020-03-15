@@ -7,6 +7,7 @@ var logger = require('morgan');
 var http = require('http');
 const config=require('./config')
 var session = require('express-session');
+var multer = require('multer');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -61,6 +62,18 @@ app.use("/", (req,res, next)=>{
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/rest/api/', apiRouter);
+
+
+/*var upload = multer({ storage: storage }).fields([
+  { name: 'file', maxCount: 1 },
+]);*/
+
+var upload = multer({ dest: 'public/uploads/',  limits: { fileSize: 100*1024*1024 } })
+
+app.post("/fileUpload",upload.single('file'), (req, res, next)=>{
+  console.log("UPLOAD", req.body)
+  res.json("1");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

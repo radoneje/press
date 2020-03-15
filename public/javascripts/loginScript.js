@@ -18,10 +18,15 @@ new Vue({
         userId:null,
         showSMS:false,
         smsRetErr:false,
-        loader:false
+        loader:false,
+        SMSloader:false
 
     },
     methods: {
+        keyDown:function(e){
+            if(e.keyCode==13)
+                sendSms();
+        },
         smiShow:function () {
             this.smiIsShow=true;
             console.log(this.smiIsShow)
@@ -50,8 +55,16 @@ new Vue({
                 .then(function (res) {
                     if(!res.data)
                     {_this.code=""; _this.codeErr=true; document.getElementById('lCode').focus(); _this.loader=false;return; }
-                    _this.showSMS=true;
                     _this.loader=false;
+
+                    setTimeout(function(){
+                        _this.showSMS=true;
+
+                    },100)
+                    setTimeout(function(){
+                        document.getElementById("smsNo").focus()
+                    },200)
+
                 })
         },
         sendSms:function () {
@@ -61,16 +74,20 @@ new Vue({
                 return;
             var m = this.smsNo.match(/^\+(\d)\s\((\d\d\d)\)\s(\d\d\d)\s(\d\d\d\d)$/);
             var n="+"+m[1]+m[2]+m[3]+m[4];
-            this.loader=true;
+            _this.loader=true;
+            _this.SMSloader=true;
             axios.post("/rest/api/sendSms",{f:this.f, i:this.i, smi:this.smi, tel:n})
                 .then(function (ret) {
-                    this.loader=false;
+                    _this.loader=false;
                     if(!ret.data)
                     { this.smsNo=""; document.getElementById('smsNo').focus();return; }
-                    console.log("sended ", n);
+                    console.log("sended ", n,  _this.loader );
                     _this.userId=ret.data;
                      _this.smsIsSend=true;
                     _this.smsRetErr=false;
+                    setTimeout(function () {
+                        document.getElementById("smsRet").focus();
+                    },500)
                 })
 
             console.log("send SMS to Number", n);

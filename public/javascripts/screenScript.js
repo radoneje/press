@@ -13,6 +13,17 @@ new Vue({
         myVideo:null
 
     },
+    computed: {
+        users: function() {
+            return this.users;
+        },
+        q: function() {
+            return this.q;
+        },
+        chat: function() {
+            return this.chat;
+        },
+    },
     methods: {
         stopBroadcastToClient:function(){
             this.startVideo();

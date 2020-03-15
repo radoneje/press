@@ -53,12 +53,18 @@ function connect(_this, m){
             })
         });
         socket.on("userDisconnnect", (userid)=>{
+            console.log("user disconnect")
             _this.users.forEach(function (user) {
                 if(user.id==userid)
                     user.isActive=false;
+                console.log("user disconnect", user.isActive)
                     user.jpg=null;
             })
         });
+        socket.on("newUser", (data)=>{
+            _this.users.push(data);
+        });
+
         socket.on("chatAdd", (data)=>{
             console.log("chatAdd");
             _this.chat.push(data);
@@ -83,16 +89,17 @@ function connect(_this, m){
                     console.log("qStatus", e.id, data.isReady)
                 }
             })
-            _this.q=_this.q.filter(function () {
-                return true;
-            })
+
             console.log("qStatus", _this.q)
 
         });
         socket.on("videoSnapshot", (data)=>{
+
             _this.users.forEach(function (user) {
                 if(user.id==data.id) {
+                    console.log("videoSnapshot2")
                     user.jpg = data.jpg;
+
                     setTimeout(function () {
                         var elem = document.getElementById('jpg_' + data.id)
                         if (elem)
@@ -101,9 +108,9 @@ function connect(_this, m){
                     }, 0)
                 }
             })
-            _this.users=_this.users.filter(function () {
+           /* _this.users=_this.users.filter(function () {
                 return true;
-            })
+            })*/
 
         })
         socket.on("stopVideo", (data)=> {
@@ -111,10 +118,10 @@ function connect(_this, m){
                 if(user.id==data.id)
                     user.jpg=null;
             })
-            console.log("videoEnded");
-            _this.users=_this.users.filter(function () {
+            console.log("stop Video on user");
+          /*  _this.users=_this.users.filter(function () {
                 return true;
-            })
+            })*/
         });
         socket.on("startVideoChat", (data)=> {
 
@@ -180,43 +187,42 @@ function connect(_this, m){
                 if(user.id==data.id)
                     user.handup=data.handup;
             })
-            console.log("userHandup");
-            _this.users=_this.users.filter(function () {
+            console.log("user Handup");
+          /*  _this.users=_this.users.filter(function () {
                 return true;
-            })
+            })*/
         });
-
-
-
-
-
-
-
     })
 }
 function chattextChange(_this, e) {
     if(e.keyCode==13 && _this.chatText.length>0){
-        axios.post("/rest/api/chat",{text:_this.chatText})
-            .then(function (e) {
-                _this.chatText="";
-                // _this.q.push(e.data);
-                setTimeout(function () {
-                    var objDiv = document.getElementById("chatBox");
-                    objDiv.scrollTop = objDiv.scrollHeight;
-                },100)
-            })
+        chattextSend(_this)
     }
+}
+function chattextSend(_this) {
+    axios.post("/rest/api/chat",{text:_this.chatText})
+        .then(function (e) {
+            _this.chatText="";
+            // _this.q.push(e.data);
+            setTimeout(function () {
+                var objDiv = document.getElementById("chatBox");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            },100)
+        })
 }
 function qtextChange(_this,e) {
     if(e.keyCode==13 && _this.qText.length>0){
-        axios.post("/rest/api/quest",{text:_this.qText})
-            .then(function (e) {
-                _this.qText="";
-                // _this.q.push(e.data);
-                setTimeout(function () {
-                    var objDiv = document.getElementById("qBox");
-                    objDiv.scrollTop = objDiv.scrollHeight;
-                },100)
-            })
+        qtextSend(_this)
     }
+}
+function qtextSend(_this) {
+    axios.post("/rest/api/quest",{text:_this.qText})
+        .then(function (e) {
+            _this.qText="";
+            // _this.q.push(e.data);
+            setTimeout(function () {
+                var objDiv = document.getElementById("qBox");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            },100)
+        })
 }
