@@ -182,7 +182,7 @@ function connect(_this, m){
                 _this.stopBroadcastToClient(data)
             }
         });
-        socket.on("stopBroadcastToClient", (data)=> {
+        socket.on("showUploadedVideo", (data)=> {
             if(typeof(_this.StartShowUploadedVideo)!='undefined'){
                 _this.StartShowUploadedVideo(data)
             }
