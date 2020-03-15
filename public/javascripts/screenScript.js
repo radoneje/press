@@ -38,7 +38,7 @@ new Vue({
             video.loadedmetadata=function(){video.play()}
             video.onplaying=function(){video.classList.add("active")}
             video.onended=function(){video.parentNode.removeChild(video)}
-            video.src='/uploads/'+data.video;
+            video.src='/uploads/'+data;
             video.id="screenUpladedVideo"
             video.classList.add("screenUpladedVideo")
             document.body.appendChild(video);
