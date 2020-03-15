@@ -48,7 +48,7 @@ new Vue({
         },
         stopShow:function(event){
             var c=event.currentTarget;
-            console.log("startBroadcast")
+            console.log("stopBroadcast")
             sendToServer(0,"stopBroadcastToClient")
             c.classList.add("clicked");
             setTimeout(function () {
