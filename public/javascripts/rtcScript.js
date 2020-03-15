@@ -48,13 +48,18 @@ function startSnap(video, _this) {
 }
 
 const configuration = {
-    iceServers: [{
-        urls: 'stun:stun.l.google.com:19302', // Google's public STUN server
-        urls: 'stun:stun1.l.google.com:19302', // Google's public STUN server
-        urls: 'stun:stun2.l.google.com:19302', // Google's public STUN server
-        urls: 'stun:stun3.l.google.com:19302', // Google's public STUN server
-        urls: 'stun:stun4.l.google.com:19302' // Google's public STUN server
-    }]
+    iceServers: [
+        /* urls: 'stun:stun.l.google.com:19302', // Google's public STUN server
+         urls: 'stun:stun1.l.google.com:19302', // Google's public STUN server
+         urls: 'stun:stun2.l.google.com:19302', // Google's public STUN server
+         urls: 'stun:stun3.l.google.com:19302', // Google's public STUN server
+         urls: 'stun:stun4.l.google.com:19302' // Google's public STUN server*/
+        {
+            'urls': 'turn:lambda.rustv.ru:3478?transport=udp',
+            'credential': 'dffdgdfghfgdh',
+            'username':"dfhfdfdg"
+        }
+    ]
 };
 function startConf(myVideo, remoteVideo) {
 
