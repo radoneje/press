@@ -33,6 +33,7 @@ new Vue({
     },
     methods: {
         StartShowUploadedVideo:function(data){
+            console.log("StartShowUploadedVideo 2", data)
             var video=document.createElement('video')
 
             video.loadedmetadata=function(){video.play()}
