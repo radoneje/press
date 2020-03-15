@@ -27,6 +27,7 @@ function takeASnap(vid){
     ctx.drawImage(vid, 0,0); // the video
     return new Promise((res, rej)=>{
         canvas.toBlob(res, 'image/jpeg'); // request a Blob from the canvas
+        console.log()
        // canvas.parentNode.removeChild(canvas);
     });
 }
@@ -165,6 +166,11 @@ function stopBroadcast(_this, data, video) {
     pcSpk=null;
 }
 function startBroadcast(_this, data, video){
+    if(_this.handUp)
+    {
+        _this.handUp=false;
+        axios.post("/rest/api/handup",{id:userId,handUp:_this.handUp});
+    }
     console.log("start Br")
     const offerOptions = {
         offerToReceiveAudio: 1,
