@@ -1,0 +1,72 @@
+extends layout
+block head
+  style.
+    body{
+      background: #EBEDEC;
+      color: #262626;
+      height: 100vh;
+    }
+block content
+  div.adminContainer(id="app")
+    div.aMenu
+    div(v-if="menuActive==3")
+      div.adminBox
+        div.adminLabel название мероприятия
+        input.adminTextBox(type="text" v-model="desc.title" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel лид мероприятия
+        textarea.adminTextArea(v-model="desc.lid" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel подзаголовок
+        input.adminTextBox(type="text" v-model="desc.subtitle" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel текст
+        textarea.adminTextArea(v-model="desc.descr" v-on:change="descrChange()")
+      div.adminBox
+        div.adminLabel дата и время мероприятия
+        input.adminTextBox(v-model="desc.date" v-on:change="descrChange()")
+    div(v-if="menuActive==2")
+      div.smiBox
+        div.adminHeader
+          span.adminBtn(v-on:click="addSmi()") добавить СМИ
+        div.smiWr
+          div.smiItem(v-for="item in smi")
+            input(type="text" placeholder="введите название" v-model="item.title" v-on:change="changeSmi(item)")
+            input.smiCode(readonly v-model="item.code")
+            div.smiDelete(v-on:click="deleteSmi(item)") удалить
+    div.aModBox(v-if="menuActive==1")
+
+      div.aModSect(style="width:100%")
+        div.aModSectTitle Вопросы
+        div.aSectBody(id="qBox")
+          div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
+            div.qItemSmi  {{item.smi}}
+            div.qItemName {{item.i}}&nbsp;{{item.f}}
+            div.qItemText {{item.text}}
+            div.qItemDate
+
+              span {{moment(item.date).format("HH:MM")}}
+        div.rFooter
+          div.askWr
+            input.ask(placeholder="Напишите Ваш вопрос" v-model="qText" v-on:keydown="qtextChange($event)")
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 8C1.5 7.17157 2.17157 6.5 3 6.5H12C12.8284 6.5 13.5 7.17157 13.5 8V16C13.5 16.8284 12.8284 17.5 12 17.5H3C2.17157 17.5 1.5 16.8284 1.5 16V8Z" stroke="#9A9A9A"/>
+            <path d="M22.0992 5.00042C22.3496 5.16734 22.5 5.44833 22.5 5.74924V18.2508C22.5 18.5517 22.3496 18.8327 22.0992 18.9996C21.7655 19.222 21.3249 19.1968 21.0187 18.9378L16.0311 14.7175C15.6943 14.4325 15.5 14.0136 15.5 13.5724V10.4276C15.5 9.98637 15.6943 9.56752 16.0311 9.28252L21.0187 5.06222C21.3249 4.80315 21.7655 4.77795 22.0992 5.00042Z" stroke="#9A9A9A"/>
+            </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 7.99902V12.2314C20 15.9695 16.8372 18.9999 12.9392 18.9999H12.0608C8.16121 18.9999 5 15.9654 5 12.2314V7.99902V7.99902" stroke="#9A9A9A"/>
+            <rect x="8.5" y="1.5" width="8" height="14" rx="2.5" stroke="#9A9A9A"/>
+            <path d="M12.6484 18.6797V23.7894" stroke="#9A9A9A"/>
+            </svg>
+
+
+  script.
+    var userId=!{JSON.stringify(user.id)};
+  script(src="/javascripts/adminScript.js")
+
+
+
+
+
+
+
