@@ -50,7 +50,7 @@ block content
     div.center
       div.L
         div.Lhead
-          div.greenBtn
+          div.greenBtn(v-if="isWebRtc()")
             div.btnContent(v-if="isEsc6() && !webCamStream" v-on:click="startRTC()" )
               span
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,6 +79,8 @@ block content
                   </g>
                   </svg>
                 span.btnContentLbl &nbsp; &nbsp; Хочу спросить
+          div(v-else)
+            div.noRTCtext Для видеоподключения используйте браузер Chrome, Ya-Browser на компьютере с веб-камерой. Сейчас вы можете загрузить видеофайл в вопрос.
         div.Lbody
           div.videoWrapper
             div(id="player")
@@ -99,6 +101,7 @@ block content
                   div.qItemSmi  {{item.smi}}
                   div.qItemName {{item.i}}&nbsp;{{item.f}}
                   div.qItemText {{item.text}}
+                  video.qItemVideo(v-bind:src="'/public/uploads/'+item.video" v-if="item.video" controls)
                   div.qItemDate
                     span.qItemReady(v-if="item.isReady")
                       span Ответ получен&nbsp;&nbsp;

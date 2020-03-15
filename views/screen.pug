@@ -10,9 +10,24 @@ block content
   div.screenContainer(id="app")
     //input(type="button" value="connect" v-on:click="startVideo()")
     //input(type="button" value="disconnnect" v-on:click="stopVideo()")
-    video(id="userVideo"  autoplay)
-    video(id="speakerVideo" muted autoplay)
 
+    video.spkUserVieo(id="userVideo"  autoplay)
+    video(id="speakerVideo" muted autoplay)
+    div.speakerMosaic(v-if="jpg.length>6")
+      div.MosaicItem(v-for="item in jpg" v-bind:key="item.id")
+        div.mosaicItemTitle {{item.i}} &nbsp; {{item.f}} &nbsp; {{item.smi}}
+        img.mosaicItemImg(v-bind:src='item.jpg')
+    div.aModBox(style="margin:0;")
+      div.aModSect(style="width:100%")
+        div.aModSectTitle Вопросы
+        div.aSectBody(id="qBox")
+          div.qItem(v-for="item in qScreen" v-bind:class="{ready:item.isReady}")
+            div.qItemSmi  {{item.smi}}
+            div.qItemName {{item.i}}&nbsp;{{item.f}}
+            div.qItemText {{item.text}}
+            video.qItemVideo(v-bind:src="'/public/uploads/'+item.video" v-if="item.video" controls)
+            div.qItemDate
+              span {{moment(item.date).format("HH:MM")}}
   script.
     var userId=!{JSON.stringify(user.id)};
   script(src="/javascripts/screenScript.js")

@@ -7,11 +7,12 @@ var logger = require('morgan');
 var http = require('http');
 const config=require('./config')
 var session = require('express-session');
-var multer = require('multer');
+var moment = require('moment');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
+var  fileUpload=require('express-fileupload')
 
 var clients=[];
 const emit=(event, data)=>{console.log("emit2 ", event,clients.length ); clients.forEach(cl=>{
@@ -49,6 +50,12 @@ app.use(session({
   store:new pgSession(pgStoreConfig),
 }));
 
+app.use(fileUpload({
+  limits: { fileSize: 100 * 1024 * 1024 },
+  useTempFiles : true,
+  tempFileDir : '/tmp/',
+  safeFileNames: true
+}));
 
 app.use("/", (req,res, next)=>{req.knex=knex;next();});
 app.use("/", (req,res, next)=>{req.clients=clients;next();});
@@ -68,11 +75,31 @@ app.use('/rest/api/', apiRouter);
   { name: 'file', maxCount: 1 },
 ]);*/
 
-var upload = multer({ dest: 'public/uploads/',  limits: { fileSize: 100*1024*1024 } })
+app.post("/fileUpload", async (req, res, next)=>{
+  console.log("UPLOAD", req.files.file)
+  var ext=null;
+  if(req.files.file.mimetype=="video/mp4")
+    ext=".mp4";
+  if(req.files.file.mimetype=="video/quicktime" )
+    ext=".mov";
 
-app.post("/fileUpload",upload.single('file'), (req, res, next)=>{
-  console.log("UPLOAD", req.body)
-  res.json("1");
+  if(ext)
+  {
+    var filename=moment().unix()+ext;
+    req.files.file.mv('public/uploads/'+filename, async function (err) {
+      if (err)
+        return res.status(500).send(err);
+      var r=await knex("t_q").insert({text:"",userid:req.session["user"].id,date:(new Date()), video: filename}, "*")
+      var q=await knex.select("*").from("v_q").where({id:r[0].id})
+
+      emit("qAdd",q[0]);
+      res.json(r[0].id);
+
+    });
+  }
+
+
+  //res.json(req.files);
 });
 
 // catch 404 and forward to error handler

@@ -65,6 +65,7 @@ block content
             div.qItemSmi  {{item.smi}}
             div.qItemName {{item.i}}&nbsp;{{item.f}}
             div.qItemText {{item.text}}
+            video.qItemVideo(v-bind:src="'/public/uploads/'+item.video" v-if="item.video" controls)
             div.qItemDate
               span.link.green(v-if="item.isReady" v-on:click="QsetNew(item)") Пометить новым&nbsp;&nbsp;
               span.link.green(v-else v-on:click="QsetOld(item)") Пометить отвеченным&nbsp;&nbsp;

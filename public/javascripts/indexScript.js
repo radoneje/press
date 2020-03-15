@@ -25,6 +25,13 @@ new Vue({
         },
     },
     methods: {
+        isWebRtc:function(){
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var ya =/YaBrowser/.test(navigator.userAgent) ;
+            var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
+            var isRTC=typeof(RTCPeerConnection)=="function"
+              return  ((isChrome || ya) && !isMobile && isRTC);
+        },
         qFileClick:function(){
             var elem= document.createElement("input");
             elem.type="file"
@@ -39,6 +46,11 @@ new Vue({
                     url: '/fileUpload',
                     data: fd,
                     headers: {'Content-Type': 'multipart/form-data' }
+                }).then(function () {
+                    setTimeout(function () {
+                        var objDiv = document.getElementById("qBox");
+                        objDiv.scrollTop = objDiv.scrollHeight;
+                    },10)
                 });
 
                 elem.parentNode.removeChild(elem)

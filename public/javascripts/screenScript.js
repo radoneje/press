@@ -10,12 +10,19 @@ new Vue({
         users:[],
         pcUser:null,
         pc2:null,
-        myVideo:null
+        myVideo:null,
+        jpg:[],
+        qScreen:[],
+    },
+    watch:{
 
     },
     computed: {
         users: function() {
             return this.users;
+        },
+        q: function(e) {
+            return this.q;
         },
         q: function() {
             return this.q;
@@ -170,6 +177,13 @@ new Vue({
         setTimeout(async function(){
 
         },100)
+
+        setInterval(()=>{
+            _this.jpg= this.users.filter(u=>{return  u.jpg});
+        },1000)
+        setInterval(()=>{
+            _this.qScreen=_this.q.slice().reverse()
+        },1000)
 
     }
 });
