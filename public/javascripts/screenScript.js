@@ -34,8 +34,12 @@ new Vue({
     methods: {
         StartShowUploadedVideo:function(data){
             console.log("StartShowUploadedVideo 2", data)
-            var video=document.createElement('video')
 
+            var video=document.getElementById('screenUpladedVideo')
+            if(video){
+                video.parentNode.removeChild(video)
+            }
+            video=document.createElement('video')
             video.onloadedmetadata=function(){video.play()}
             video.onplaying=function(){video.classList.add("active")}
             video.preload="metadata";
@@ -51,6 +55,10 @@ new Vue({
             this.pc2=null;
             document.getElementById('userVideo').srcObject=null;
             sendToServer({userid:userId/*кому посылаем команду*/ }, "stopVideoChat")
+            var video=document.getElementById('screenUpladedVideo')
+            if(video){
+                video.parentNode.removeChild(video)
+            }
         },
         startBroadcastToClient:function(toUserId){
             this.startVideo(toUserId);
@@ -60,6 +68,10 @@ new Vue({
             this.pcUser=null;
             this.pc2=null;
             sendToServer({userid:userId/*кому посылаем команду*/ }, "stopVideoChat")
+            var video=document.getElementById('screenUpladedVideo')
+            if(video){
+                video.parentNode.removeChild(video)
+            }
         },
 
         startVideo:async function (toUserId) {
