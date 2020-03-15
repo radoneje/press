@@ -65,7 +65,7 @@ block content
             div.qItemSmi  {{item.smi}}
             div.qItemName {{item.i}}&nbsp;{{item.f}}
             div.qItemText {{item.text}}
-            video.qItemVideo(v-bind:src="'/public/uploads/'+item.video" v-if="item.video" controls)
+            video.qItemVideo(v-bind:src="'/uploads/'+item.video" v-if="item.video" controls)
             div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
               span Показать на экране
             div.qItemDate
