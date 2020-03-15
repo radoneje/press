@@ -121,13 +121,13 @@ block content
             div(v-if="!loader") Получить код
             div(v-if="loader")
                 <svg style="width: 50px;" version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-                <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+                <circle fill="#28BA54" stroke="none" cx="6" cy="50" r="6">
                 <animateattributeName="opacity"dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" / >
                 </circle>
-                <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+                <circle fill="#28BA54" stroke="none" cx="26" cy="50" r="6">
                 <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2" / >
                 </circle>
-                <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+                <circle fill="#28BA54" stroke="none" cx="46" cy="50" r="6">
                 <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3" / >
                 </circle>
                 </svg>
@@ -137,7 +137,19 @@ block content
               input.smsNo(type='text' id='smsRet' placeholder="" v-model="smsRet")
               div.llInputBoxWarning Код из СМС указан неверно
             div.smsSubmit(v-show="checkCode(smsRet)" v-on:click="checkSms()")
-              div Проверить
+              div(v-if="!loader") Проверить
+              div(v-if="loader")
+                <svg style="width: 50px;" version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                <circle fill="#28BA54" stroke="none" cx="6" cy="50" r="6">
+                <animateattributeName="opacity"dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" / >
+                </circle>
+                <circle fill="#28BA54" stroke="none" cx="26" cy="50" r="6">
+                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2" / >
+                </circle>
+                <circle fill="#28BA54" stroke="none" cx="46" cy="50" r="6">
+                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3" / >
+                </circle>
+                </svg>
             div.smsReturn(v-on:click="smsIsSend=false")
               div Вернуться к вводу телефона
 
