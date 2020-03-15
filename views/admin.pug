@@ -66,6 +66,8 @@ block content
             div.qItemName {{item.i}}&nbsp;{{item.f}}
             div.qItemText {{item.text}}
             video.qItemVideo(v-bind:src="'/public/uploads/'+item.video" v-if="item.video" controls)
+            div.greenBtn(v-if="item.video" style="height: max-content;width: max-content;padding: 5px;" v-on:click="showUploadedVideo(item, $event)")
+              span Показать на экране
             div.qItemDate
               span.link.green(v-if="item.isReady" v-on:click="QsetNew(item)") Пометить новым&nbsp;&nbsp;
               span.link.green(v-else v-on:click="QsetOld(item)") Пометить отвеченным&nbsp;&nbsp;

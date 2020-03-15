@@ -176,11 +176,17 @@ server.listen(config.port,e=>{
     socket.on("roomVideoMessage",(data)=>{
       console.log("roomVideoMessage", data.type, id)
       clients.filter(e=>e.isActive==true).forEach(e=>{
-        console.log("emit")
         data.id=id;
         e.socket.emit("roomVideoMessage", data)
       })
     })
+    socket.on("showUploadedVideo",(data)=>{
+      console.log("showUploadedVideo")
+      clients.filter(e=>e.isActive==true).forEach(e=>{
+        e.socket.emit("showUploadedVideo", data)
+      })
+    })
+
 
     socket.on("startBroadcastToClient",(data)=> {
       console.log("startBroadcastToClient")

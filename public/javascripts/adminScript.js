@@ -24,6 +24,17 @@ new Vue({
         },
     },
     methods: {
+        showUploadedVideo:function(item, event){
+
+            var c=event.currentTarget;
+            c.classList.add("clicked");
+            setTimeout(function () {
+                c.classList.remove("clicked");
+            }, 2000);
+            console.log("showUploadedVideo", {id:item.id, video:item.video}, )
+            sendToServer(item.video,"showUploadedVideo")
+
+        },
         startShow:function(item, event){
 
             var c=event.currentTarget;

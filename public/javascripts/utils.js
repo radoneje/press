@@ -182,6 +182,12 @@ function connect(_this, m){
                 _this.stopBroadcastToClient(data)
             }
         });
+        socket.on("stopBroadcastToClient", (data)=> {
+            if(typeof(_this.StartShowUploadedVideo)!='undefined'){
+                _this.StartShowUploadedVideo(data)
+            }
+        });
+
         socket.on("userHandup", (data)=> {
             _this.users.forEach(function (user) {
                 if(user.id==data.id)

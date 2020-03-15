@@ -32,6 +32,17 @@ new Vue({
         },
     },
     methods: {
+        StartShowUploadedVideo:function(data){
+            var video=document.createElement('video')
+
+            video.loadedmetadata=function(){video.play()}
+            video.onplaying=function(){video.classList.add("active")}
+            video.onended=function(){video.parentNode.removeChild(video)}
+            video.src='/uploads/'+data.video;
+            video.id="screenUpladedVideo"
+            video.classList.add("screenUpladedVideo")
+            document.body.appendChild(video);
+        },
         stopBroadcastToClient:function(){
             this.startVideo();
             this.pcUser=null;

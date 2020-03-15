@@ -985,7 +985,17 @@ position: absolute;
     margin: 0 auto;
     text-shadow: 0px 0px 5px white;
 }
+.screenUpladedVideo{
+  position: fixed;
+  z-index: 10;
+  top:-1000px;
+  left: 0;
+  width: 100%;
 
+}
+.screenUpladedVideo.active{
+  top:0;
+}
 @media only screen and (max-width: 1440px) {
   .lTopRBox {
     position: absolute;
