@@ -218,6 +218,7 @@ function startBroadcast(_this, data, video){
             if (remoteVideo.srcObject !== event.streams[0]) {
                 remoteVideo.srcObject = event.streams[0];
                 remoteVideo.play();
+                remoteVideo.onplay=()=>{alert("play")};
                 console.log('ON TRACK received remote stream', event);
             }
             console.log("ON TRACK!", event.streams)
