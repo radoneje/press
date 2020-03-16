@@ -200,10 +200,13 @@ function onYouTubeIframeAPIReady() {
         videoId: '3PMNjsa5sGA',
         host: 'https://www.youtube.com',
         events: {
-            // 'onReady': onPlayerReady,
+             'onReady': onPlayerReady,
             // 'onStateChange': onPlayerStateChange
         }
     });
+}
+function onPlayerReady(event) {
+    event.target.playVideo();
 }
 
 
