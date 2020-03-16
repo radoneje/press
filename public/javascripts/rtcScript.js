@@ -221,7 +221,10 @@ function startBroadcast(_this, data, video){
                     remoteVideo.play();
                 },500)
 
-                remoteVideo.onplay=()=>{console.log("REMOTE PLAY")};
+                var timeout=setTimeout(()=>{
+                    startBroadcast(_this, data, video);
+                },500)
+                remoteVideo.onplay=()=>{clearTimeout(timeout)};
                 console.log('ON TRACK received remote stream', event);
             }
             console.log("ON TRACK!", event.streams)
