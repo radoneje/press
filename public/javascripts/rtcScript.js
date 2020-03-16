@@ -58,6 +58,11 @@ const configuration = {
             'urls': 'turn:lambda.rustv.ru:3478?transport=udp',
             'credential': 'dffdgdfghfgdh',
             'username':"dfhfdfdg"
+        },
+        {
+            'urls': 'turn:lambda.rustv.ru:3479?transport=udp',
+            'credential': 'dffdgdfghfgdh',
+            'username':"dfhfdfdg"
         }
     ]
 };
