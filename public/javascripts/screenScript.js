@@ -103,7 +103,7 @@ new Vue({
                      urls: 'stun:stun3.l.google.com:19302', // Google's public STUN server
                      urls: 'stun:stun4.l.google.com:19302' // Google's public STUN server*/
                     {
-                        'urls': 'turn:lambda.rustv.ru:3479?transport=udp',
+                        'urls': 'turn:re.rustv.ru:3478?transport=udp',
                         'credential': 'dffdgdfghfgdh',
                         'username':"dfhfdfdg"
                     },
