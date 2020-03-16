@@ -66,42 +66,53 @@ app.use("/", (req,res, next)=>{
   next();}
   );
 
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/rest/api/', apiRouter);
-
-
-/*var upload = multer({ storage: storage }).fields([
-  { name: 'file', maxCount: 1 },
-]);*/
+const routes=[
+    {path:'/', handler:indexRouter},
+  {path:'/rest/api/', handler:apiRouter},
+];
+routes.forEach((r)=>{
+  try{
+    app.use(r.path, r.handler);
+  }
+  catch (e) {
+    console.warn("error in route",r.path );
+  }
+})
 
 app.post("/fileUpload", async (req, res, next)=>{
-  if(!req.session['user'])
-    return res.next();
+  try {
+    if (!req.session['user'])
+      return res.next();
 
-  console.log("UPLOAD", req.files.file)
-  var ext=null;
-  if(req.files.file.mimetype=="video/mp4")
-    ext=".mp4";
-  if(req.files.file.mimetype=="video/quicktime" )
-    ext=".mov";
+    console.log("UPLOAD", req.files.file)
+    var ext = null;
+    if (req.files.file.mimetype == "video/mp4")
+      ext = ".mp4";
+    if (req.files.file.mimetype == "video/quicktime")
+      ext = ".mov";
 
-  if(ext)
-  {
-    var filename=moment().unix()+ext;
-    req.files.file.mv('public/uploads/'+filename, async function (err) {
-      if (err)
-        return res.status(500).send(err);
-      var r=await knex("t_q").insert({text:"",userid:req.session["user"].id,date:(new Date()), video: filename}, "*")
-      var q=await knex.select("*").from("v_q").where({id:r[0].id})
+    if (ext) {
+      var filename = moment().unix() + ext;
+      req.files.file.mv('public/uploads/' + filename, async function (err) {
+        if (err)
+          return res.status(500).send(err);
+        var r = await knex("t_q").insert({
+          text: "",
+          userid: req.session["user"].id,
+          date: (new Date()),
+          video: filename
+        }, "*")
+        var q = await knex.select("*").from("v_q").where({id: r[0].id})
 
-      emit("qAdd",q[0]);
-      res.json(r[0].id);
+        emit("qAdd", q[0]);
+        res.json(r[0].id);
 
-    });
+      });
+    }
   }
-
+  catch (e) {
+    console.warn('uploadError', e)
+  }
 
   //res.json(req.files);
 });
