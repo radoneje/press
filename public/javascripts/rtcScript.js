@@ -222,17 +222,16 @@ function startBroadcast(_this, data, video){
                     console.warn('PLAY')
                 },500)
 
-                var timeout=setTimeout(()=>{
+                var playTo=setTimeout(()=>{
                   //  startBroadcast(_this, data, video);
                     console.warn('RESTART PLAY')
                 },1000)
                    // .addEventListener("playing", function () {
 
-
                 var plaingFunction = function (event) {
-                    clearTimeout(timeout)
+                    clearTimeout(playTo)
                     console.warn('PLAYING');
-                    remoteVideo.removeEventListener('playing',plaingFunction, false );
+                  //  remoteVideo.removeEventListener('playing',plaingFunction, false );
                 };
                 console.log('ON TRACK received remote stream', event);
             }
