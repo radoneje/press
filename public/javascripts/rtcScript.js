@@ -227,10 +227,13 @@ function startBroadcast(_this, data, video){
                     console.warn('RESTART PLAY')
                 },1000)
                    // .addEventListener("playing", function () {
-                remoteVideo.addEventListener("playing", function () {
-                    console.warn('PLAYING')
-                });
-                remoteVideo.playing=()=>{console.warn('PLAYING');clearTimeout(timeout)};
+
+
+                var plaingFunction = function (event) {
+                    clearTimeout(timeout)
+                    console.warn('PLAYING');
+                    remoteVideo.removeEventListener('playing',plaingFunction, false );
+                };
                 console.log('ON TRACK received remote stream', event);
             }
             console.log("ON TRACK!", event.streams)
