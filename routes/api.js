@@ -45,13 +45,24 @@ router.post("/smi",async (req, res, next)=> {
 })
 
 router.post("/checkCode",async (req, res, next)=> {
-  var r=await req.knex.select("*").from("t_smi").where({id:req.body.id, code:req.body.code});
-    res.json(r.length>0);
-    return ;
+  if(req.body.code.length>6)
+    return  setTimeout(()=>{res.json(false);},1000);
 
+  if(isNaN(parseInt(req.body.code)))
+    return setTimeout(()=>{res.json(false);},1000);
+
+  if(parseInt(req.body.code)>1000000)
+    return setTimeout(()=>{res.json(false);},1000);
+
+
+
+  var r=await req.knex.select("*").from("t_smi").where({id:req.body.id, code:req.body.code});
+  setTimeout(()=>{res.json(r.length>0);},3000);
 })
 
 router.post("/sendSms",async (req, res, next)=> {
+  if(req.body.tel.length>15 || req.body.f.length>20 || req.body.i.length>20 )
+    return res.next();
   await req.knex("t_users").update({isDeleted:true}).where({tel:req.body.tel});
   var code=(parseInt(Math.random()*10000)+parseInt(10000))
   var r=await req.knex("t_users")
@@ -62,15 +73,18 @@ router.post("/sendSms",async (req, res, next)=> {
   var rr= await axios.get(url);
   console.log("req compl")
  // console.log(rr.data)
+  setTimeout(()=>{ res.json(r[0].id);}, 1000)
 
-
-  res.json(r[0].id);
 });
 router.post("/checkSMS",async (req, res, next)=> {
+  if(req.body.code.length>15 || req.body.id.length>20 )
+    return res.next();
+
   var r= await req.knex.select("*").from("t_users")
       .where({isDeleted:false, id:req.body.id, smsCode:req.body.code});
-  if(r.length==0)
-    res.json(false)
+  if(r.length==0){
+    return setTimeout(()=>{ res.json(false);}, 1000)
+  }
   else{
 
    r=await req.knex("t_users").update({isConfirm:true, confirmdate:(new Date())}, "*")
@@ -79,7 +93,7 @@ router.post("/checkSMS",async (req, res, next)=> {
 
    req.emit("newUser", u[0]);
    req.session["user"]=r[0];
-    res.json(r[0].id);
+    setTimeout(()=>{ res.json(r[0].id);}, 1000)
   }
 
 })

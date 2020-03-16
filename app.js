@@ -77,6 +77,9 @@ app.use('/rest/api/', apiRouter);
 ]);*/
 
 app.post("/fileUpload", async (req, res, next)=>{
+  if(!req.session['user'])
+    return res.next();
+
   console.log("UPLOAD", req.files.file)
   var ext=null;
   if(req.files.file.mimetype=="video/mp4")
