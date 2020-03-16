@@ -49,11 +49,12 @@ router.post('/adminLogin', async function(req, res, next) {
     var r=await req.knex.select("*").from("t_users").where({"tel":"03"})
     console.log("user", r[0])
     req.session["user"]=r[0];
+    setTimeout(()=>{  res.redirect("/admin")}, 1000)
 
-    res.redirect("/admin")
   }
   else
-    res.render('adminLogin', { title: 'admin Login' });
+    setTimeout(()=>{  res.render('adminLogin', { title: 'admin Login' });}, 1000)
+
 });
 
 router.get('/room', function(req, res, next) {
