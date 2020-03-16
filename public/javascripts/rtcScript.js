@@ -165,7 +165,8 @@ ${desc.sdp}`);
 }
 function stopBroadcast(_this, data, video) {
     console.log("stop broadcasdt")
-    document.location.reload(false);
+    if(remoteVideo.srcObject)
+        document.location.reload(false);
     remoteVideo.srcObject=null;
     remoteVideo.style.display="none"
     YTplayer.unMute()
