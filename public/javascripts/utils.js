@@ -53,12 +53,11 @@ function connect(_this, m){
             })
         });
         socket.on("userDisconnnect", (userid)=>{
-            console.log("user disconnect")
             _this.users.forEach(function (user) {
-                if(user.id==userid)
-                    user.isActive=false;
-                console.log("user disconnect", user.isActive)
-                    user.jpg=null;
+                if(user.id==userid) {
+                    user.isActive = false;
+                    user.jpg = null;
+                }
             })
         });
         socket.on("newUser", (data)=>{
