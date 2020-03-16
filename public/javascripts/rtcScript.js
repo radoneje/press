@@ -222,17 +222,11 @@ function startBroadcast(_this, data, video){
                     console.warn('PLAY')
                 },500)
 
-                var playTo=setTimeout(()=>{
-                  //  startBroadcast(_this, data, video);
-                    console.warn('RESTART PLAY')
-                },1000)
-                   // .addEventListener("playing", function () {
 
-                var plaingFunction = function (event) {
-                    clearTimeout(playTo)
-                    console.warn('PLAYING');
-                  //  remoteVideo.removeEventListener('playing',plaingFunction, false );
-                };
+                remoteVideo.addEventListener("playing", function () {
+                    socket.emit("mayShowScreen", {id: userId});
+
+                })
                 console.log('ON TRACK received remote stream', event);
             }
             console.log("ON TRACK!", event.streams)

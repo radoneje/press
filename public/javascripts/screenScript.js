@@ -178,8 +178,10 @@ new Vue({
             this.pcUser.addIceCandidate(data.candidate)
                 .then(()=>{console.log("candidate2  OK")})
                 .catch((e)=>{console.warn("candidate2  err", e)})
-        }
-
+        },
+        mayShowScreen:function () {
+            document.getElementById("userVideo").classList.add("shoe")
+        }    
 
     },
     mounted: async function () {

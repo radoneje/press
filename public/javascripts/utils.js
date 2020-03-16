@@ -198,6 +198,14 @@ function connect(_this, m){
                 return true;
             })*/
         });
+        socket.on("showUploadedVideo", (data)=> {
+            console.log("showUploadedVideo",data)
+            if(typeof(_this.mayShowScreen)!='undefined'){
+                _this.mayShowScreen(data)
+            }
+        });
+
+
     })
 }
 function chattextChange(_this, e) {

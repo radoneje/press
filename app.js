@@ -266,6 +266,15 @@ server.listen(config.port,e=>{
         }
       });
     });
+    socket.on("icecandidate2",(data)=>{
+
+      clients.forEach(cl=>{
+        if( cl.isActive==true) {
+          cl.socket.emit("mayShowScreen", {id: id})
+        }
+      });
+    });
+
 ///////////
 
     })
