@@ -224,7 +224,7 @@ function startBroadcast(_this, data, video){
 
 
                 remoteVideo.addEventListener("playing", function () {
-                    socket.emit("mayShowScreen", {id: userId});
+
 
                 })
                 console.log('ON TRACK received remote stream', event);

@@ -155,6 +155,7 @@ new Vue({
                                 remoteVideo.style.display="block";
                                 YTplayer.mute();
                                 console.log("remoteVideo ON", YTplayer.isMuted())
+                                socket.emit("mayShowScreen", {id: userId});
                                 //alert(YTplayer.isMuted)
 
                             })

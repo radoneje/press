@@ -198,8 +198,8 @@ function connect(_this, m){
                 return true;
             })*/
         });
-        socket.on("showUploadedVideo", (data)=> {
-            console.log("showUploadedVideo",data)
+        socket.on("mayShowScreen", (data)=> {
+            console.log("mayShowScreen",data)
             if(typeof(_this.mayShowScreen)!='undefined'){
                 _this.mayShowScreen(data)
             }
