@@ -180,7 +180,7 @@ new Vue({
                 .catch((e)=>{console.warn("candidate2  err", e)})
         },
         mayShowScreen:function () {
-            document.getElementById("userVideo").classList.add("shoe")
+            document.getElementById("userVideo").classList.add("show")
         }    
 
     },
