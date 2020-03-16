@@ -23,6 +23,7 @@
     "pug": "2.0.0-beta11",
     "reset.css": "^2.0.2",
     "socket.io": "^2.3.0",
+    "socketio-jwt": "^4.5.0",
     "webrtc-adapter": "^7.5.0",
     "websocket": "^1.0.31"
   }

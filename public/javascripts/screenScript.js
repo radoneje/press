@@ -74,7 +74,7 @@ new Vue({
             sendToServer({userid:userId/*кому посылаем команду*/ }, "stopVideoChat")
             var videoWr=document.getElementById('screenUpladedVideoWr')
             if(videoWr){
-                videoWr.parentNode.removeChild(video)
+                videoWr.parentNode.removeChild(videoWr)
             }
         },
 
@@ -84,11 +84,11 @@ new Vue({
 
             const constraints={
                 audio: true,
-                video: {
+                video:true/* {
                     width: { min: 320, ideal: 640, max: 720 },
                     facingMode: "user",
                     aspectRatio: 1.777777778
-                }
+                }*/
             }
             var myVideo=document.getElementById('speakerVideo')
             myVideo.srcObject=await navigator.mediaDevices.getUserMedia(constraints)
