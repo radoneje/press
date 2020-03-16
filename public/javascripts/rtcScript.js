@@ -165,10 +165,12 @@ ${desc.sdp}`);
 }
 function stopBroadcast(_this, data, video) {
     console.log("stop broadcasdt")
+    document.location.reload(false);
     remoteVideo.srcObject=null;
     remoteVideo.style.display="none"
     YTplayer.unMute()
     pcSpk=null;
+
 }
 function startBroadcast(_this, data, video){
     if(_this.handUp)

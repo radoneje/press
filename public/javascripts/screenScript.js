@@ -63,6 +63,7 @@ new Vue({
             if(videoWr){
                 videoWr.parentNode.removeChild(videoWr)
             }
+            document.location.reload(false);
         },
         startBroadcastToClient:function(toUserId){
             this.startVideo(toUserId);
@@ -76,6 +77,7 @@ new Vue({
             if(videoWr){
                 videoWr.parentNode.removeChild(videoWr)
             }
+            document.location.reload(false);
         },
 
         startVideo:async function (toUserId) {

@@ -7,6 +7,33 @@ block head
       height: 100vh;
       overflow-y: hidden;
     }
+    .qItemTitle{
+      margin-top:.5em;
+      margin-bottom:.5em
+    }
+    .qItemTitle div{
+      display: inline-block;
+      font-size: 36px;
+      margin-right: 1em;
+    }
+    .qItemText {
+      font-size: 28px;
+      line-height: 40px;
+    }
+    .qItem{
+      padding: 40px;
+      padding-bottom: 20px;
+    }
+    .qItemDate {
+      font-size: 28px;
+    }
+    .qItemVideo {
+      padding: 0 672px;
+      background: #2323;
+      height: 230px;
+    }
+
+
 block content
   div.screenContainer(id="app")
     //input(type="button" value="connect" v-on:click="startVideo()")
@@ -23,8 +50,9 @@ block content
         div.aModSectTitle Вопросы
         div.aSectBody(id="qBox")
           div.qItem(v-for="item in qScreen" v-bind:class="{ready:item.isReady}")
-            div.qItemSmi  {{item.smi}}
-            div.qItemName {{item.i}}&nbsp;{{item.f}}
+            div.qItemTitle
+              div.qItemSmi  {{item.smi}}
+              div.qItemName {{item.i}}&nbsp;{{item.f}}
             div.qItemText {{item.text}}
             video.qItemVideo(v-bind:src="'/uploads/'+item.video" v-if="item.video" controls)
 
