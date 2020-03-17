@@ -164,7 +164,7 @@ server.listen(config.port,e=>{
         clients.forEach(cl=>{
           if(cl.id==id)
             cl.isActive=false;
-          emit("userDisconnnect",cl.userid)
+        //  emit("userDisconnnect",cl.userid)
         })
 
       })
