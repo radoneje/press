@@ -61,12 +61,19 @@ function connect(_this, m){
             })
         });
         socket.on("newUser", (data)=>{
+            if(_this.users.filter(function (u) {
+                return u.id==data.id
+            }).length==0)
             _this.users.push(data);
         });
 
         socket.on("chatAdd", (data)=>{
             console.log("chatAdd");
-            _this.chat.push(data);
+
+            if(_this.chat.filter(function (u) {
+                return u.id==data.id
+            }).length==0)
+                _this.chat.push(data);
             setTimeout(function () {
                 var objDiv = document.getElementById("chatBox");
                 objDiv.scrollTop = objDiv.scrollHeight;
@@ -76,7 +83,11 @@ function connect(_this, m){
             _this.chat=_this.chat.filter(function (e) {return e.id!=data;});
         });
         socket.on("qAdd", (data)=>{
-            _this.q.push(data);
+            if(_this.q.filter(function (u) {
+                return u.id==data.id
+            }).length==0)
+                _this.q.push(data);
+
         });
         socket.on("qDelete", (data)=>{
             _this.q=_this.q.filter(function (e) {return e.id!=data;});
@@ -88,17 +99,13 @@ function connect(_this, m){
                     console.log("qStatus", e.id, data.isReady)
                 }
             })
-
             console.log("qStatus", _this.q)
-
         });
         socket.on("videoSnapshot", (data)=>{
-
             _this.users.forEach(function (user) {
                 if(user.id==data.id) {
                     console.log("videoSnapshot2")
                     user.jpg = data.jpg;
-
                     setTimeout(function () {
                         var elem = document.getElementById('jpg_' + data.id)
                         if (elem)
@@ -123,7 +130,6 @@ function connect(_this, m){
             })*/
         });
         socket.on("startVideoChat", (data)=> {
-
             var video=document.getElementById("myVideo")
             if(video  && video.srcObject)
                 startBroadcast(_this, data, video);
@@ -136,9 +142,7 @@ function connect(_this, m){
                 stopBroadcast(_this, data, video);
 
         })
-
         socket.on("videoOffer", (data)=> {
-
             console.log("vf 1")
             if(typeof(_this.videoOffer)){
                 console.log("vf2")
