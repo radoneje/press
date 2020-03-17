@@ -6,7 +6,7 @@ router.get('/', login, async(req, res, next) =>{
 
   var r=await req.knex.select("*").from("t_descr")
   console.log("index",r[0].title.replace("<br>",""), r[0].title)
-  var title=r[0].title.split("<br>").join("");//.replace(//gi," ")
+  var title=r[0].title.split("<br>").join(" ");//.replace(//gi," ")
   r[0].title=title;
   res.render('index', { title:title, descr:r[0], user:req.session['user']});
       // res.render('login', { title: r[0].title, descr:r[0], user:req.session['user']});
