@@ -105,7 +105,7 @@ block content
               div.rHeadItem(v-for="item in sect" v-bind:class="{active:item.isActive}" v-on:click="sectActive(item)") {{item.title}}
             div.rContentWr(v-if="activeSection==1")
               div.rBody(id="qBox" )
-                div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==userId)}")
+                div.qItem(v-for="item in q" v-bind:class="{my:(item.userid==userId)}" v-if="item.userid==userId")
                   div.qItemSmi  {{item.smi}}
                   div.qItemName {{item.i}}&nbsp;{{item.f}}
                   div.qItemText {{item.text}}
