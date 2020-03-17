@@ -15,8 +15,7 @@ var apiRouter = require('./routes/api');
 var  fileUpload=require('express-fileupload')
 
 var clients=[];
-const emit=(event, data)=>{console.log("emit2 ", event,clients.length ); clients.forEach(cl=>{
-  console.log("client ", cl.is, cl.isActive)
+const emit=(event, data)=>{ clients.forEach(cl=>{
   if(cl.isActive) cl.socket.emit(event,data)
 })};
 
