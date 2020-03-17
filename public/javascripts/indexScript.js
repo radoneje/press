@@ -150,15 +150,14 @@ new Vue({
                             var remoteVideo=document.getElementById("remoteVideo")
                             startSnap(video, _this);
                             startConf(video,remoteVideo, _this)
-                            remoteVideo.addEventListener("playing", function () {
-                               // alert(123)
+                            var videoEventHandler=function(){
                                 remoteVideo.style.display="block";
                                 YTplayer.mute();
                                 console.log("remoteVideo ON", YTplayer.isMuted())
                                 socket.emit("mayShowScreen", {id: userId});
-                                //alert(YTplayer.isMuted)
-
-                            })
+                                remoteVideo.removeEventListener("playing",videoEventHandler,true)
+                            }
+                            remoteVideo.addEventListener("playing", videoEventHandler)
 
                             }, 0)
                     })

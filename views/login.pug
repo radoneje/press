@@ -57,9 +57,9 @@ block content
           div.lColTower
             div.lBsubTitle #{descr.subtitle}
             div.lBsubDescr #{descr.descr}
-            div.lBsubHed Конференция начнется:
-            div.lBsubTime(id="lBsubTime") color: #28BA54;
-            script.
+            //div.lBsubHed Конференция начнется:
+            //div.lBsubTime(id="lBsubTime") color: #28BA54;
+            //script.
               var timeStart=new Date('!{descr.date}')
               var elem=document.getElementById('lBsubTime')
               elem.innerText=moment(timeStart).fromNow();
