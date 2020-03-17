@@ -61,7 +61,7 @@ block content
 
     video.spkUserVieo(id="userVideo"  autoplay)
     video(id="speakerVideo" muted autoplay)
-    div.speakerMosaic(v-if="jpg.length>8")
+    div.speakerMosaic
       div.MosaicItem(v-for="item in jpg" v-bind:key="item.id")
         div.mosaicItemTitle {{item.i}} &nbsp; {{item.f}} &nbsp; {{item.smi}}
         img.mosaicItemImg(v-bind:src='item.jpg')
