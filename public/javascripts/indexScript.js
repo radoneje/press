@@ -210,7 +210,6 @@ function onYouTubeIframeAPIReady() {
 function onPlayerReady(event) {
     YTplayer.playVideo();
 
-
 }
 
 
