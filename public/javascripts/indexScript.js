@@ -202,11 +202,15 @@ function onYouTubeIframeAPIReady() {
         events: {
              'onReady': onPlayerReady,
             // 'onStateChange': onPlayerStateChange
-        }
+        },
+        showinfo:0
     });
+
 }
 function onPlayerReady(event) {
-    event.target.playVideo();
+    YTplayer.playVideo();
+
+
 }
 
 
