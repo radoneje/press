@@ -57,7 +57,7 @@ block content
           div.lColTower
             div.lBsubTitle #{descr.subtitle}
             div.lBsubDescr #{descr.descr}
-            //div.lBsubHed Конференция начнется:
+            div.lBsubHed Конференция окончена
             //div.lBsubTime(id="lBsubTime") color: #28BA54;
             //script.
               var timeStart=new Date('!{descr.date}')
@@ -66,7 +66,7 @@ block content
               setInterval(function(){elem.innerText=moment(timeStart).fromNow();},500)
         div.lTopR
           div.lColTower
-            div.lBsubRTitle Для входа, пожалуйста, представьтесь
+           // div.lBsubRTitle Для входа, пожалуйста, представьтесь
             div.lBsubRTitleMust Все поля обязательны для заполнения
             div.llBox
               div.llHalf
