@@ -42,7 +42,7 @@ block content
             div.smiDelete(v-on:click="deleteSmi(item)") удалить
     div.aModBox(v-if="menuActive==1")
       div.aModSect
-        div.aModSectTitle ЧАТ
+        div.aModSectTitle ЧАТ ({{chat.length}})
         div.aSectBody(id="chatBox")
           div.qItem(v-for="item in chat")
             div.qItemSmi  {{item.smi}}
@@ -62,7 +62,7 @@ block content
             </svg>
             input.ask(placeholder="Напишите Ваше сообщение" id="chatText" v-model="chatText" v-on:keydown="chattextChange($event)")
       div.aModSect
-        div.aModSectTitle Вопросы
+        div.aModSectTitle Вопросы ({{q.length}})
         div.aSectBody(id="qBox")
           div.qItem(v-for="item in q" v-bind:class="{ready:item.isReady}")
             div.qItemSmi  {{item.smi}}
@@ -96,7 +96,7 @@ block content
             </svg>
 
       div.aModSect
-        div.aModSectTitle Пользователи
+        div.aModSectTitle Пользователи ({{users.length}})
 
         div.aSectBody.aSectUser
           div.qItem.userItem(v-for="item in users" v-bind:key="item.id" v-bind:class="{active:(item.isActive), handup:item.handup}")
