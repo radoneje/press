@@ -136,7 +136,6 @@ function connect(_this, m){
 
         })
         socket.on("stopVideoChat", (data)=> {
-
             var video=document.getElementById("myVideo")
             if(video  && video.srcObject)
                 stopBroadcast(_this, data, video);
