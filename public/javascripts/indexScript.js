@@ -198,6 +198,12 @@ new Vue({
 
 function startVideo() {
     var video = document.getElementById('video');
+    var html=GetFlashPlayer();
+    var parent=video.parentNode(); // some E DOM instance
+    var videoObj=document.createElement(); //element which should be first in E
+    videoObj.innerHTML="html";
+    eElement.insertBefore(videoObj, parent.firstChild);
+return;
     if (Hls.isSupported()) {
 
         var hls = new Hls();
@@ -245,6 +251,29 @@ function startVideo() {
             video.play();
         });
     }
+}
+function GetFlashPlayer(){
+    return('<object width="1020" height="574" id="slon" data="https://www.aloha.cdnvideo.ru/aloha/slon/SlonPlayer_new.swf" type="application/x-shockwave-flash">'+
+        '<script type="text/javascript">'+
+        'if (typeof window.external.msActiveXFilteringEnabled != "undefined"'+
+        ' && window.external.msActiveXFilteringEnabled() == true) {'+
+        'document.write(\'<div style="width:1020px;height:574px">Для просмотра отключите фильтрацию ActiveX внастройках браузера и перезагрузите эту страницу</div>\');}<\/script>' +
+        '<param name="movie" value="https://www.aloha.cdnvideo.ru/aloha/slon/SlonPlayer_new.swf" />'+
+        '<param name="allowfullscreen" value="true" />'+
+        '<param name="allowscriptaccess" value="always" />'+
+        '<param name="flashvars" value='+
+        '"config='+
+        '{ \'playlist\':'+
+        '{\'autoPlay\' : \'false\' '+
+        ', \'startPoster\':\'/images/bg_01.png\' '+                                        ',\'clip\' :  '+
+        '{\'live\': \'true\'  '+
+        ',\'progressLine\':\'false\' '+
+        ',\'url\': \'rtmp://aurora.cdnvideo.ru/aurora/aurora1.sdp\' '+
+        '}'+
+        '}'+
+        '};"'+
+        '/>'+
+        '</object>');
 }
 /*function onYouTubeIframeAPIReady() {
     console.log(" onYouTubeIframeAPIReady();")
