@@ -200,7 +200,7 @@ function startVideo() {
     var video = document.getElementById('video');
     var html=GetFlashPlayer();
     var parent=video.parentNode; // some E DOM instance
-    var videoObj=document.createElement(); //element which should be first in E
+    var videoObj=document.createElement('div'); //element which should be first in E
     videoObj.innerHTML="html";
     eElement.insertBefore(videoObj, parent.firstChild);
 return;
