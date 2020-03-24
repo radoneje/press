@@ -12,7 +12,7 @@ function msieversion() {
 if(msieversion())
 {
     console.log("IE find")
-    document.getElementById("lBottomBox").innerHTML="IE не поддерживается. Пожалуйста, используйте браузеры Edge, Yandex, Chrome, Firefox или Safari"
+    document.getElementById("lBottomBox").innerHTML="<div class='lBsubRTitle'>IE не поддерживается. Пожалуйста, используйте браузеры Edge, Yandex, Chrome, Firefox или Safari</div>"
 }
 else {
     new Vue({
