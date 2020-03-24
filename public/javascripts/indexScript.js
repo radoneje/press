@@ -202,6 +202,7 @@ function startVideo() {
     var parent=video.parentNode; // some E DOM instance
     var videoObj=document.createElement('div'); //element which should be first in E
     videoObj.innerHTML=html;
+    videoObj.id="video"
     parent.insertBefore(videoObj, parent.firstChild);
     parent.removeChild(video)
 return;
