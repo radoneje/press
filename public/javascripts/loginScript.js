@@ -159,7 +159,7 @@ else {
 
         }
     });
-
+}
     function checkCode(code) {
 
         if (code.length < 5)
@@ -202,7 +202,7 @@ else {
         input.addEventListener("focus", mask, false);
         input.addEventListener("blur", mask, false);
     }
-}
+
 
 
 
