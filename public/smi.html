@@ -13,7 +13,7 @@
 <script>
     $.get("/rest/api/smi",(dt)=>{
         console.log(dt)
-
+        dt.forEach(e=>{$("#aa").append("<div>"+e.title+"    "+e.code+"</div>")});
     })
 
 </script>
