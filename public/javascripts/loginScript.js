@@ -164,7 +164,7 @@ else {
         if (code.length < 5)
             return false;
 //console.log("f check",Number.isInteger( parseInt(code)) )
-        Number.isInteger(parseInt(code));
+        return Number.isInteger(parseInt(code));
 
 
     }
