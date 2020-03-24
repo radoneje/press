@@ -138,7 +138,7 @@ function checkCode(code) {
     if(Number.isInteger)
     return  Number.isInteger( parseInt(code));
     else
-        parseInt(code)
+        parseInt(code)>1000
 
 }
 function setCursorPosition(pos, elem) {
