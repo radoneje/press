@@ -202,7 +202,7 @@ function startVideo() {
     var parent=video.parentNode; // some E DOM instance
     var videoObj=document.createElement('div'); //element which should be first in E
     videoObj.innerHTML="html";
-    eElement.insertBefore(videoObj, parent.firstChild);
+    parent.insertBefore(videoObj, parent.firstChild);
     parent.removeChild(video)
 return;
     if (Hls.isSupported()) {
