@@ -126,7 +126,7 @@ new Vue({
         var _this=this;
         if(msieversion())
         {
-            document.getElementById("lBottomBox").html="IE не поддерживается. Пожалуйста, используйтте браузеры Edge, Yandex, Chrome, Firefox или Safari"
+            document.getElementById("lBottomBox").html="IE не поддерживается. Пожалуйста, используйте браузеры Edge, Yandex, Chrome, Firefox или Safari"
             return;
         }
         document.addEventListener("click", function () {
@@ -180,19 +180,14 @@ if(input) {
 
 function msieversion() {
 
-    var ua = window.navigator.userAgent;
-    var msie = ua.indexOf("MSIE ");
 
-    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
-    {
-        alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
-    }
-    else  // If another browser, return 0
-    {
-        alert('otherbrowser');
-    }
+        var ua = window.navigator.userAgent; //Check the userAgent property of the window.navigator object
+        var msie = ua.indexOf('MSIE '); // IE 10 or older
+        var trident = ua.indexOf('Trident/'); //IE 11
 
-    return false;
+        return (msie > 0 || trident > 0);
+
+
 }
 
 
