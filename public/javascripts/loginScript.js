@@ -134,8 +134,11 @@ function checkCode(code) {
 
     if(code.length<5)
         return false;
-console.log("f check",Number.isInteger( parseInt(code)) )
+//console.log("f check",Number.isInteger( parseInt(code)) )
+    if(Number.isInteger)
     return  Number.isInteger( parseInt(code));
+    else
+        parseInt(code)
 
 }
 function setCursorPosition(pos, elem) {
