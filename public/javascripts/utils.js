@@ -27,7 +27,7 @@ function connect(_this, m){
         sendToServer=function (data, type) {
             socket.emit(type||"roomVideoMessage", data);
         }
-        socket.on("roomVideoMessage", (msg)=>{
+        socket.on("roomVideoMessage", function(data){
             switch(msg.type) {
                 case "video-answer":  // Invitation and offer to chat
                     //handleVideoAnswerMsg(msg);
@@ -46,13 +46,13 @@ function connect(_this, m){
 
         })
 
-        socket.on("userConnnect", (userid)=>{
+        socket.on("userConnnect", function(userid){
             _this.users.forEach(function (user) {
                 if(user.id==userid)
                     user.isActive=true;
             })
         });
-        socket.on("userDisconnnect", (userid)=>{
+        socket.on("userDisconnnect", function(userid){
             _this.users.forEach(function (user) {
                 if(user.id==userid) {
                     user.isActive = false;
@@ -60,14 +60,14 @@ function connect(_this, m){
                 }
             })
         });
-        socket.on("newUser", (data)=>{
+        socket.on("newUser", function(data){
             if(_this.users.filter(function (u) {
                 return u.id==data.id
             }).length==0)
             _this.users.push(data);
         });
 
-        socket.on("chatAdd", (data)=>{
+        socket.on("chatAdd", function(data){
             console.log("chatAdd");
 
             if(_this.chat.filter(function (u) {
@@ -79,20 +79,20 @@ function connect(_this, m){
                 objDiv.scrollTop = objDiv.scrollHeight;
             },0)
         });
-        socket.on("chatDelete", (data)=>{
+        socket.on("chatDelete", function(data){
             _this.chat=_this.chat.filter(function (e) {return e.id!=data;});
         });
-        socket.on("qAdd", (data)=>{
+        socket.on("qAdd", function(data){
             if(_this.q.filter(function (u) {
                 return u.id==data.id
             }).length==0)
                 _this.q.push(data);
 
         });
-        socket.on("qDelete", (data)=>{
+        socket.on("qDelete", function(data){
             _this.q=_this.q.filter(function (e) {return e.id!=data;});
         });
-        socket.on("qStatus", (data)=>{
+        socket.on("qStatus", function(data){
             _this.q.forEach(function (e) {
                 if(e.id==data.id) {
                     e.isReady = data.isReady;
@@ -101,7 +101,7 @@ function connect(_this, m){
             })
             console.log("qStatus", _this.q)
         });
-        socket.on("videoSnapshot", (data)=>{
+        socket.on("videoSnapshot", function(data){
             _this.users.forEach(function (user) {
                 if(user.id==data.id) {
                     console.log("videoSnapshot2")
@@ -119,7 +119,7 @@ function connect(_this, m){
             })*/
 
         })
-        socket.on("stopVideo", (data)=> {
+        socket.on("stopVideo", function(data) {
             _this.users.forEach(function (user) {
                 if(user.id==data.id)
                     user.jpg=null;
@@ -129,26 +129,26 @@ function connect(_this, m){
                 return true;
             })*/
         });
-        socket.on("startVideoChat", (data)=> {
+        socket.on("startVideoChat", function(data) {
             var video=document.getElementById("myVideo")
             if(video  && video.srcObject)
                 startBroadcast(_this, data, video);
 
         })
-        socket.on("stopVideoChat", (data)=> {
+        socket.on("stopVideoChat", function(data) {
             var video=document.getElementById("myVideo")
             if(video  && video.srcObject)
                 stopBroadcast(_this, data, video);
 
         })
-        socket.on("videoOffer", (data)=> {
+        socket.on("videoOffer", function(data) {
             console.log("vf 1")
             if(typeof(_this.videoOffer)){
                 console.log("vf2")
                 _this.videoOffer(data)
             }
         })
-        socket.on("videoAnswer", (data)=> {
+        socket.on("videoAnswer", function(data){
             if(typeof(videoAnswer)!='undefined'){
                 videoAnswer(data)
             }
@@ -156,7 +156,7 @@ function connect(_this, m){
                 _this.videoAnswer(data)
             }
         })
-        socket.on("icecandidate", (data)=> {
+        socket.on("icecandidate", function(data) {
 
             if(typeof(videoIce)!='undefined'){
                 videoIce(data)
@@ -165,7 +165,7 @@ function connect(_this, m){
                 _this.videoIce(data)
             }
         })
-        socket.on("icecandidate2", (data)=> {
+        socket.on("icecandidate2", function(data) {
                 console.log("va2 111")
             if(typeof(videoIce)!='undefined'){
                 videoIce2(data)
@@ -174,24 +174,24 @@ function connect(_this, m){
                 _this.videoIce2(data)
             }
         })
-        socket.on("startBroadcastToClient", (data)=> {
+        socket.on("startBroadcastToClient", function(data) {
             if(typeof(_this.startBroadcastToClient)!='undefined'){
                 _this.startBroadcastToClient(data)
             }
         });
-        socket.on("stopBroadcastToClient", (data)=> {
+        socket.on("stopBroadcastToClient", function(data) {
             if(typeof(_this.stopBroadcastToClient)!='undefined'){
                 _this.stopBroadcastToClient(data)
             }
         });
-        socket.on("showUploadedVideo", (data)=> {
+        socket.on("showUploadedVideo", function(data) {
             console.log("showUploadedVideo",data)
             if(typeof(_this.StartShowUploadedVideo)!='undefined'){
                 _this.StartShowUploadedVideo(data)
             }
         });
 
-        socket.on("userHandup", (data)=> {
+        socket.on("userHandup", function(data) {
             _this.users.forEach(function (user) {
                 if(user.id==data.id)
                     user.handup=data.handup;
@@ -201,7 +201,7 @@ function connect(_this, m){
                 return true;
             })*/
         });
-        socket.on("mayShowScreen", (data)=> {
+        socket.on("mayShowScreen", function(data) {
             console.log("mayShowScreen",data)
             if(typeof(_this.mayShowScreen)!='undefined'){
                 _this.mayShowScreen(data)
