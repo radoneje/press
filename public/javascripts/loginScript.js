@@ -122,7 +122,7 @@ new Vue({
             })
         }
     },
-    mounted: async function () {
+    mounted:  function () {
         var _this=this;
         document.addEventListener("click", function () {
             _this.smiIsShow=false;
