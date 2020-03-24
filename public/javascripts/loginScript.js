@@ -124,10 +124,16 @@ new Vue({
     },
     mounted:  function () {
         var _this=this;
+        if(msieversion())
+        {
+            document.getElementById("lBottomBox").html="IE не поддерживается. Пожалуйста, используйтте браузеры Edge, Yandex, Chrome, Firefox или Safari"
+            return;
+        }
         document.addEventListener("click", function () {
             _this.smiIsShow=false;
         })
         _this.smiList=s;
+
     }
 });
 function checkCode(code) {
@@ -135,10 +141,8 @@ function checkCode(code) {
     if(code.length<5)
         return false;
 //console.log("f check",Number.isInteger( parseInt(code)) )
-    if(Number.isInteger)
-    return  Number.isInteger( parseInt(code));
-    else
-        parseInt(code)>1000
+      Number.isInteger( parseInt(code));
+
 
 }
 function setCursorPosition(pos, elem) {
@@ -168,9 +172,30 @@ function mask(event) {
 };
 
 var input = document.querySelector("#smsNo");
-input.addEventListener("input", mask, false);
-input.addEventListener("focus", mask, false);
-input.addEventListener("blur", mask, false);
+if(input) {
+    input.addEventListener("input", mask, false);
+    input.addEventListener("focus", mask, false);
+    input.addEventListener("blur", mask, false);
+}
+
+function msieversion() {
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
+    {
+        alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
+    }
+    else  // If another browser, return 0
+    {
+        alert('otherbrowser');
+    }
+
+    return false;
+}
+
+
 
 
 
