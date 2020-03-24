@@ -1,4 +1,4 @@
-var YTplayer;
+
 new Vue({
     el: '#app',
     data: {
@@ -152,8 +152,11 @@ new Vue({
                             startConf(video,remoteVideo, _this)
                             var videoEventHandler=function(){
                                 remoteVideo.style.display="block";
-                                YTplayer.mute();
-                                console.log("remoteVideo ON", YTplayer.isMuted())
+
+                                var videoEl = document.getElementById('video')
+                                if(videoEl)
+                                    videoEl.muted=true;
+                                //console.log("remoteVideo ON", YTplayer.isMuted())
                                 socket.emit("mayShowScreen", {id: userId});
                                 remoteVideo.removeEventListener("playing",videoEventHandler,true)
                             }
