@@ -198,7 +198,7 @@ block content
               div.llHalf
                 div.llInputBox(v-bind:class="{warning:(smiErr && !smi.id)}")
                   div.llInputBoxLabel
-                    div.sel(v-on:click.stop="smiShow()") {{smi.title||'Выберите СМИ'}}
+                    div.sel(v-on:click.stop="smiShow()") {{smi.title||'Выберите организацию'}}
                   div.llInputBoxWarning СМИ должно быть выбрано
                   div.llSmiBox(v-bind:style="{display:smiIsShow?'block':'none'}" )
                       div.llSmiItem(v-on:click="smiSelect(item)" v-for="item in smiList" v-bind:class="{selected:item.id==smi.id}") {{item.title}}
