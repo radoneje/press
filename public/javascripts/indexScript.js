@@ -255,7 +255,7 @@ return;
     }
 }
 function GetFlashPlayer(){
-    return('<object width="1020" height="574" id="slon" data="https://www.aloha.cdnvideo.ru/aloha/slon/SlonPlayer_new.swf" type="application/x-shockwave-flash">'+
+    return('<object id="videoObj" width="1020" height="574" id="slon" data="https://www.aloha.cdnvideo.ru/aloha/slon/SlonPlayer_new.swf" type="application/x-shockwave-flash">'+
         '<script type="text/javascript">'+
         'if (typeof window.external.msActiveXFilteringEnabled != "undefined"'+
         ' && window.external.msActiveXFilteringEnabled() == true) {'+
