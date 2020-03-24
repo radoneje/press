@@ -202,7 +202,7 @@ new Vue({
         connect(_this, true);
         setTimeout(function(){
             sendToServer(1,"isScreen")
-        },100)
+        },1000)
 
         const constraints={
             audio: true,
