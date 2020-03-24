@@ -5,10 +5,9 @@ function msieversion() {
     var msie = ua.indexOf('MSIE '); // IE 10 or older
     var trident = ua.indexOf('Trident/'); //IE 11
 
-    var v= (msie > 0 || trident > 0);
+    var v = (msie > 0 || trident > 0);
     console.log("ie", v)
     return v
-
 }
 if(msieversion())
 {
