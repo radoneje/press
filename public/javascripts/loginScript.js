@@ -38,13 +38,19 @@ new Vue({
             var _this=this;
            if(this.f.length<2)
            {this.fErr=true;}
+           else
+               this.fErr=false
             if(this.i.length<2)
             {this.iErr=true;}
+            else
+                this.iErr=false
 
                 this.codeErr=!checkCode(this.code)
 
             if(!this.smi.id)
             {this.smiErr=true;}
+            else
+                this.smiErr=false
 
             if(this.fErr || this.iErr || this.codeErr || this.smiErr)
             { console.log(this.smi, this.fErr , this.iErr , this.codeErr , this.smiErr);  return;}

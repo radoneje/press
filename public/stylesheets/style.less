@@ -40,7 +40,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #28BA54;
+  background: #3D89E0;
   border-radius: 4px;
   height: 50px;
   width: calc(100% );
@@ -100,8 +100,8 @@ span.red{
   cursor: pointer;
 }
 .aMenuItem.active{
-  color:#28BA54;
-  border-bottom: 1px solid #28BA54;
+  color:#3D89E0;
+  border-bottom: 1px solid #3D89E0;
 }
 .aMenu{
   height: 40px;
@@ -213,7 +213,7 @@ span.red{
 .lTop .lTopL{
   width: 100%;
   height: 100%;
-  min-height: 100vh;
+//  min-height: 100vh;
 }
 .lTopR{
   width: 50%;
@@ -224,7 +224,14 @@ span.red{
   padding: 32px 56px;
   width: ~"calc(100% - 56px - 56px)";
   height: ~"calc(100% - 32px - 32px)";
+
 }
+.lColTower.first{
+  background: url(/images/bg_01.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .lTopTitle{
   font-family: Fedra Sans Pro;
   font-style: normal;
@@ -242,12 +249,15 @@ span.red{
 .lTopLid{
   font-family: Fedra Sans Pro;
   font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+  font-weight: 100;
+  font-size: 24px;
   line-height: 32px;
   margin-top: 24px;
   color: #FFFFFF;
   white-space: pre-line
+}
+.lTopLogo{
+   margin-top: 24px;
 }
 .lColRcontainer{
   width: 100%;
@@ -322,7 +332,7 @@ span.red{
   font-size: 24px;
   line-height: 30px;
   margin-top: 16px;
-  color: #28BA54;
+  color: #3D89E0;
 }
 .lBsubRTitle{
   margin-top: 32px;
@@ -344,7 +354,7 @@ span.red{
   line-height: 28px;
   /* identical to box height, or 156% */
   margin-top:16px;
-  color: #FFA715;
+  color: #3D89E0;;
 }
 .llBox{
 
@@ -435,7 +445,7 @@ input:focus{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #28BA54;
+  background: #3D89E0;
   border-radius: 4px;
   height: 50px;
 }
@@ -470,8 +480,8 @@ input:focus{
 .llSmiItem.selected:after{
   content: '';
   display: block;
-  border-bottom: 2px solid #28BA54;
-  border-left: 2px solid #28BA54;
+  border-bottom: 2px solid #3D89E0;
+  border-left: 2px solid #3D89E0;
   position: absolute;
   width: 12px;
   height: 6px;
@@ -490,7 +500,7 @@ input:focus{
   line-height: 28px;
 }
 .llFooter span{
-  color: #28BA54;
+  color: #3D89E0;
 }
 .fullScreenBox{
   background: rgba(38, 38, 38, 0.4);
@@ -567,7 +577,7 @@ input:focus{
 
   text-align: center;
   cursor: pointer;
-  color: #28BA54;
+  color: #3D89E0;
   font-weight: 100;
 }
 .smsInpBox{
@@ -630,7 +640,7 @@ width: 128px;
   top: 12px;
 }
 .green{
-  color:#28BA54
+  color:#3D89E0
 }
 .center{
   width: ~"calc(100% - 40px)";
@@ -674,7 +684,7 @@ display: flex;
 .greenBtn{
   width: 255px;
   height: 42px;
-  background: #28BA54;
+  background: #3D89E0;
   border-radius: 4px;
   color:white;
   display: flex;
@@ -691,7 +701,7 @@ display: flex;
   padding-bottom: 56.25%; /* 16:9 */
   height: 0;
 }
-.videoWrapper iframe {
+.videoWrapper iframe, .videoWrapper video {
    position: absolute;
    top: 0;
    left: 0;
@@ -731,8 +741,8 @@ display: flex;
   color: #262626;
 }
 .rHeadItem.active{
-  border-bottom: 2px solid  #28BA54;;
-  color: #28BA54;
+  border-bottom: 2px solid  #3D89E0;;
+  color: #3D89E0;
 }
 .rFooter{
   height: 48px;
@@ -777,7 +787,7 @@ display: flex;
   margin-bottom: 15px;
 }
 .qItem.my .qItemName{
-  color:#28BA54;
+  color:#3D89E0;
 }
 .qItemSmi{
   font-family: Fedra Sans Pro;
@@ -837,7 +847,7 @@ text-align: right;
   top: 15px;
 }
 .userItem.active  path{
-  fill:#28BA54;
+  fill:#3D89E0;
 }
 .qItemReady{
   width: 122px;
@@ -851,7 +861,7 @@ text-align: right;
   line-height: 16px;
   letter-spacing: -0.0521739px;
 padding: 4px 10px;
-  color: #28BA54;
+  color: #3D89E0;
   margin-right: 15px;
 }
 #myVideo,#remoteVideo{
@@ -906,7 +916,7 @@ padding: 4px 10px;
   }
 }
 .handUp{
-  background: #f59625;
+  background: #0CB9AF;;
 
   padding: 5px;
   border-radius: 4px;
@@ -914,7 +924,7 @@ padding: 4px 10px;
   animation: flik 1s infinite ;
 }
 .userHandUp path{
-  fill:#f59625 !important;
+  fill:#0CB9AF !important;
 }
 .userHandUp{
   position: absolute;
@@ -947,7 +957,7 @@ position: absolute;
   cursor: pointer;
 }
 .greenBtn.clicked{
-  background: #ffcb00;
+  background: #0CB9AF;;
   opacity: 1;
 }
 .speakerMosaic{
@@ -1028,6 +1038,26 @@ position: absolute;
   top: 0px;
   left: 0;
 
+
+}
+.videoPlayBannner{
+
+}
+
+.videoPlayBannner{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.videoPlayBannner svg{
+  width: 25%;
+  height: 25%;
+  cursor: pointer;
 }
 @media only screen and (max-width: 1024px) {
   .lTopTitle {

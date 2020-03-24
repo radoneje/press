@@ -188,11 +188,62 @@ new Vue({
 
                 console.log(_this.users)
             })
+        startVideo();
     }
 
 });
 
-function onYouTubeIframeAPIReady() {
+function startVideo() {
+    var video = document.getElementById('video');
+    if (Hls.isSupported()) {
+
+        var hls = new Hls();
+        console.log("init HLS")
+        hls.loadSource(video.src);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            console.log("MANIFEST_PARSED")
+            var banner=document.querySelector(".videoPlayBannner");
+            banner.style.display="flex";
+            banner.onclick=function () {
+                console.log("PLAY")
+                video.play();
+                banner.style.display="none";
+            }
+        });
+        hls.on(Hls.Events.ERROR, function (event, data) {
+            if (data.fatal) {
+                switch(data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        // try to recover network error
+                        console.log("fatal network error encountered, try to recover");
+                        hls.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        console.log("fatal media error encountered, try to recover");
+                        hls.recoverMediaError();
+                        break;
+                    default:
+                        // cannot recover
+                        hls.destroy();
+                        break;
+                }
+            }
+        });
+    }
+    // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+    // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
+    // This is using the built-in support of the plain video element, without using hls.js.
+    // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
+    // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        //video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+        video.addEventListener('loadedmetadata', function() {
+            video.play();
+        });
+    }
+}
+/*function onYouTubeIframeAPIReady() {
     console.log(" onYouTubeIframeAPIReady();")
     YTplayer = new YT.Player('player', {
         height: '360',
@@ -210,7 +261,7 @@ function onYouTubeIframeAPIReady() {
 function onPlayerReady(event) {
     YTplayer.playVideo();
 
-}
+}*/
 
 
 
