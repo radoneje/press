@@ -93,7 +93,11 @@ new Vue({
                 }*/
             }
             var myVideo=document.getElementById('speakerVideo')
-            myVideo.srcObject=await navigator.mediaDevices.getUserMedia(constraints)
+            try {
+                myVideo.srcObject = await navigator.mediaDevices.getUserMedia(constraints)
+            } catch (e) {
+                console.warn("speakerVideo", e)
+            }
 
             var servers = {
                 iceServers: [
