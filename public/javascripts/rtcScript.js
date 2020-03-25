@@ -5,7 +5,7 @@ async function   initCam (_this){
         audio: true,
         video: {
             width: { min: 320, ideal: 640, max: 1280 },
-            height:{min: 180, ideal:320 , max:720},
+            //height:{min: 180, ideal:320 , max:720},
             facingMode: "user",
             aspectRatio: 1.777777778
         }
