@@ -140,7 +140,7 @@ block content
     div.center
       div.L
         div.Lhead
-          div.greenBtn(v-if="isWebRtc()")
+          div.greenBtn(v-if="true || isWebRtc()")
             div.btnContent(v-if="isEsc6() && !webCamStream" v-on:click="startRTC()" )
               span
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,8 +151,7 @@ block content
                 <path d="M4.33215 20.6143C4.03612 20.6143 3.74039 20.5017 3.51457 20.2762C1.24816 18.0141 0 15.0065 0 11.8073C0 8.60773 1.24816 5.60009 3.51457 3.33807C3.9668 2.88672 4.69955 2.88731 5.1509 3.33983C5.60254 3.79206 5.60166 4.52452 5.14944 4.97616C3.32122 6.80087 2.31409 9.2267 2.31409 11.807C2.31409 14.3872 3.32122 16.8134 5.14944 18.6381C5.60166 19.0897 5.60254 19.8222 5.1509 20.2747C4.92508 20.5011 4.62847 20.6143 4.33215 20.6143Z" fill="white"/>
                 </svg>
               span.btnContentLbl &nbsp; &nbsp; Присоединиться
-            //div.btnContent(v-if="isEsc6() && webCamStream" v-bind:class="{handUp:handUp}" v-on:click="handUpClick()")
-            div.btnContent(v-on:click="handUpClick()")
+            div.btnContent(v-if="isEsc6() && webCamStream" v-bind:class="{handUp:handUp}" v-on:click="handUpClick()")
                 span
                   <svg width="19px" height="20px" viewBox="0 0 19 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
