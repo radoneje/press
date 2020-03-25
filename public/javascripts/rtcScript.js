@@ -28,7 +28,7 @@ function takeASnap(vid){
     ctx.drawImage(vid, 0,0); // the video
     return new Promise((res, rej)=>{
         canvas.toBlob(res, 'image/jpeg'); // request a Blob from the canvas
-        console.log()
+        //console.log()
        // canvas.parentNode.removeChild(canvas);
     });
 }
@@ -165,7 +165,7 @@ ${desc.sdp}`);
     }*/
 }
 function stopBroadcast(_this, data, video) {
-    console.log("stop broadcasdt")
+ //   console.log("stop broadcasdt")
     if(remoteVideo.srcObject)
         document.location.reload(false);
     remoteVideo.srcObject=null;
@@ -180,7 +180,7 @@ function startBroadcast(_this, data, video){
         _this.handUp=false;
         axios.post("/rest/api/handup",{id:userId,handUp:_this.handUp});
     }
-    console.log("start Br")
+    console.log("start broadcasdt")
     const offerOptions = {
         offerToReceiveAudio: 1,
         offerToReceiveVideo: 1
@@ -199,16 +199,17 @@ function startBroadcast(_this, data, video){
         sendToServer({desc:desc, id:data.id}, "videoOffer")
     }, err, offerOptions);
     ////////////////////
+    pcSpk.onicecandidate = (event) => {
+        //console.log("sent candidate",event )
+        sendToServer({clientid:data.id, candidate:event.candidate}, "icecandidate2")
+    }
     pcSpk.setRemoteDescription(data.desc,()=>{console.log("remote descr set")},()=>{console.warn("remote descr err")});
     pcSpk.createAnswer((answ)=>{
         pcSpk.setLocalDescription(answ, ()=>{console.warn("local descr err")});
         sendToServer({clientid:data.id, answ:answ}, "videoAnswer")
         console.log("createAnswer succ", answ);
     }, ()=>{console.warn("remote descr err")});
-    pcSpk.onicecandidate = (event) => {
-        console.log("sent candidate",event )
-        sendToServer({clientid:data.id, candidate:event.candidate}, "icecandidate2")
-    }
+
     pcSpk.ontrack=function(event){
 
             if (remoteVideo.srcObject !== event.streams[0]) {
@@ -229,7 +230,7 @@ function startBroadcast(_this, data, video){
         }
 }
 function videoAnswer(data) {
-    pc1.setRemoteDescription(data.answ,()=>{console.log("remote Descr OK")}, (err)=>{console.warn("remote Descr err", err)})
+    pc1.setRemoteDescription(data.answ,()=>{/*console.log("remote Descr OK")*/}, (err)=>{console.warn("remote Descr err", err)})
 }
 function  videoIce(data) {
     pc1.addIceCandidate(data.candidate)
@@ -237,7 +238,7 @@ function  videoIce(data) {
         .catch((e)=>{console.warn("candidate  err", e)})
 }
 function  videoIce2(data) {
-    console.log("videoIce2");
+    //console.log("videoIce2");
     pcSpk.addIceCandidate(data.candidate)
         .then(()=>{console.log("candidate2  OK")})
         .catch((e)=>{console.warn("candidate2  err", e)})
