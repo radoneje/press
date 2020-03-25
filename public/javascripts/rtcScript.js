@@ -43,7 +43,7 @@ function startSnap(video, _this) {
                 socket.emit("videoSnapshot", {id: userId, jpg: base64data});
             }
         }
-        startSnap(video, _this);
+       // startSnap(video, _this);
     }, 1000)
 
 }
