@@ -91,6 +91,7 @@ new Vue({
                     facingMode: "user",
                     aspectRatio: 1.777777778
                 }*/
+
             }
             var myVideo=document.getElementById('speakerVideo')
             try {
