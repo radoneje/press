@@ -140,7 +140,7 @@ block content
     div.center
       div.L
         div.Lhead
-          div.greenBtn(v-if="true || isWebRtc()")
+          div.greenBtn(v-if="isWebRtc()")
             div.btnContent(v-if="isEsc6() && !webCamStream" v-on:click="startRTC()" )
               span
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
