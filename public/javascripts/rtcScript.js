@@ -170,7 +170,7 @@ function stopBroadcast(_this, data, video) {
         document.location.reload(false);
     remoteVideo.srcObject=null;
     remoteVideo.style.display="none"
-    YTplayer.unMute()
+   // YTplayer.unMute()
     pcSpk=null;
 
 }
