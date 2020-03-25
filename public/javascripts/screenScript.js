@@ -109,8 +109,8 @@ new Vue({
                      urls: 'stun:stun4.l.google.com:19302' // Google's public STUN server*/
                     {
                         'urls': 'turn:re.rustv.ru:3478',
-                        'credential': 'Gbplfgbplf13',
-                        'username':"gbplf"
+                        'credential': 'user2',
+                        'username':"user2"
                     }
                 ]
             };
