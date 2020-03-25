@@ -120,16 +120,16 @@ new Vue({
             };
 
             this.pc2 = new RTCPeerConnection(servers);
-            this.pcUser = new RTCPeerConnection(servers);
-            myVideo.srcObject.getTracks().forEach(track => this.pcUser.addTrack(track, myVideo.srcObject));
+           // this.pcUser = new RTCPeerConnection(servers);
+          //  myVideo.srcObject.getTracks().forEach(track => this.pcUser.addTrack(track, myVideo.srcObject));
 
 
             this.pc2.oniceconnectionstatechange=()=>{console.log("oniceconnectionstatechange")}
-            this.pcUser.createOffer((desc)=>{
+          /*  this.pcUser.createOffer((desc)=>{
                 this.pcUser.setLocalDescription(desc, ()=>{console.log("set local Descr OK")})
                // sendToServer({desc:desc, id:clientId}, "videoOffer")
-                sendToServer({userid:toUserId/*кому посылаем команду*/,desc:desc }, "startVideoChat")
-            }, (e)=>{console.warn("set local Descr ERR", e)}, offerOptions);
+                sendToServer({userid:toUserId,desc:desc }, "startVideoChat")
+            }, (e)=>{console.warn("set local Descr ERR", e)}, offerOptions);*/
 
 
 
@@ -137,50 +137,51 @@ new Vue({
 
         },
         videoOffer:function (data) {
-            console.log("videoOffer", data);
-            console.log("ice candidate", this.pc2.onicecandidate)
+
             if(!this.pc2.onicecandidate)
                 this.pc2.onicecandidate=(event)=>{
                     sendToServer({clientid:data.id, candidate:event.candidate}, "icecandidate")
                 }
-            if(!this.pcUser.onicecandidate)
+           /* if(!this.pcUser.onicecandidate)
                 this.pcUser.onicecandidate = (event) => {
-                    console.log("sent candidate",event )
+
                     sendToServer({clientid:data.id, candidate:event.candidate}, "icecandidate2")
-                }
+                }*/
             if(!this.pc2.ontrack)
                 this.pc2.ontrack=(event)=>{
                 var video=document.getElementById('userVideo')
                     if (video.srcObject !== event.streams[0]) {
                         video.srcObject = event.streams[0];
-                        console.log('ON TRACK received remote stream', event);
+
                     }
-                console.log("ON TRACK!", event.streams)
+
             }
             this.pc2.setRemoteDescription(data.desc,()=>{console.log("remote descr set")},()=>{console.warn("remote descr err")})
             this.pc2.createAnswer((answ)=>{
                 this.pc2.setLocalDescription(answ, ()=>{console.warn("local descr err")});
                 sendToServer({clientid:data.id, answ:answ}, "videoAnswer")
-                console.log("createAnswer succ", answ);
+
             }, ()=>{console.warn("remote descr err")});
         },
         videoAnswer:function(data){
-            this.pcUser.setRemoteDescription(data.answ,()=>{console.log("remote Descr OK")}, (err)=>{console.warn("remote Descr err", err)})
+           // this.pcUser.setRemoteDescription(data.answ,()=>{console.log("remote Descr OK")}, (err)=>{console.warn("remote Descr err", err)})
         },
         videoIce:function (data) {
             console.log("va 4", data)
             this.pc2.addIceCandidate(data.candidate)
-                .then(()=>{console.log("candidate  OK")})
+                .then(()=>{})
                 .catch((e)=>{console.warn("candidate  err", e)})
         },
         videoIce2:function (data) {
-            console.log("va2 4", data)
+            /*    console.log("va2 4", data)
             this.pcUser.addIceCandidate(data.candidate)
-                .then(()=>{console.log("candidate2  OK")})
-                .catch((e)=>{console.warn("candidate2  err", e)})
+                   .then(()=>{})
+                   .catch((e)=>{console.warn("candidate2  err", e)})*/
         },
         mayShowScreen:function () {
-            document.getElementById("userVideo").classList.add("show")
+            document.getElementById("userVideo").classList.add("show");
+
+
         }    
 
     },
