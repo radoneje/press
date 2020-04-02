@@ -128,9 +128,10 @@ router.get("/chat",login,async (req, res, next)=> {
 
 router.get("/users",login,async (req, res, next)=> {
  //.orderBy(["f","i"]).where({isDeleted:false, isConfirm:true});// {text:req.body.text, userid:req.session["user"].id, date:(new Date())}, "*")
-  var r=await req.knex.select("*").from("v_users");
+  var r=await req.knex.select("*").from("v_eventusers");
   r.forEach(u=>{
     req.clients.forEach(c=>{
+      u.isActive = false;
       if(c.userid==u.id /*&& c.isActive==true*/)
         u.isActive = true;
     })
